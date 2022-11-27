@@ -1,22 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Product!
+	Products
 {% endblock %}
 
 {% block body %}
+	<!--- Breadcrumbs-->
+	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+		<ol class="breadcrumb bg-light">
+			<li class="breadcrumb-item">
+				<a href='{{ path('home') }}'>Accueil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="{{path('category_index')}}">Categories</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="{{path('category_subcategories',{category : category.childs.id})}}">{{category.childs.name}}</a>
+			</li>
+			<li class="breadcrumb-item" aria-current='page'>{{category.name}}</li>
+		</ol>
+	</nav>
 
-
+	<!-- Products List -->
 	<div class="container ">
 		<div class=' row mt-4  align-items-center justify-content-center'>
 			{% for product in products %}
 
 
 				<div class="card  bg-light  mb-3 me-4" style="max-width: 20rem;">
-					<div class="card-body">
-
+					<div
+						class="card-body">
+						{# <a href="{{path('product_details', {'id' : product.id})}}"></a> #}
 						<h4 class="card-title">{{ product.name }}</h4>
 						<p class="card-text">{{product.description}}</p>
+
 
 					</div>
 				</a>

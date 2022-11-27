@@ -2,13 +2,29 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
+use App\Entity\User;
+use Faker\Generator;
 use App\Entity\Product;
 use App\Entity\Category;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * @var Generator
+     *
+     * @var Generator
+     */
+    private Generator $faker;
+
+
+    public function __construct()
+    {
+        $this->faker = Factory::create('fr_FR');
+    }
     public function load(ObjectManager $manager): void
     {
 
@@ -152,6 +168,19 @@ class AppFixtures extends Fixture
                 ->setDiscount('0')
                 ->setStock(mt_rand(1, 100));
             $manager->persist($product);
+        }
+
+        // ***  USERS  *** //
+        for ($i = 0; $i < 10; $i++) {
+            $user = new User();
+            $user->setName($this->faker->name())
+                ->setLastname($this->faker->name())
+                ->setBirthdate($this->faker->dateTime())
+                ->setPhoneNumber($this->faker->e164PhoneNumber())
+                ->setEmail($this->faker->email())
+                ->setRoles(['ROLE_USER'])
+                ->setPlainpassword('password');
+            $manager->persist($user);
         }
 
         $manager->flush();

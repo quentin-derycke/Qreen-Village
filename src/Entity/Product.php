@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -32,12 +32,12 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?int $stock = null;
 
-    #[ORM\ManyToOne(inversedBy: 'category')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?category $categoryId = null;
-
     #[ORM\Column(length: 50)]
     private ?string $reference = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $categoryId = null;
 
     public function getId(): ?int
     {
@@ -116,17 +116,6 @@ class Product
         return $this;
     }
 
-    public function getCategoryId(): ?category
-    {
-        return $this->categoryId;
-    }
-
-    public function setCategoryId(?category $categoryId): self
-    {
-        $this->categoryId = $categoryId;
-
-        return $this;
-    }
 
     public function getReference(): ?string
     {
@@ -136,6 +125,18 @@ class Product
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?Category
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId(?Category $categoryId): self
+    {
+        $this->categoryId = $categoryId;
 
         return $this;
     }

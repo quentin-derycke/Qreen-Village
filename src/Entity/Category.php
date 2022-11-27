@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -25,12 +25,13 @@ class Category
     private Collection $parent;
 
     #[ORM\OneToMany(mappedBy: 'categoryId', targetEntity: Product::class)]
-    private Collection $category;
+    private Collection $products;
+
 
     public function __construct()
     {
         $this->parent = new ArrayCollection();
-        $this->category = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,27 +96,27 @@ class Category
     /**
      * @return Collection<int, Product>
      */
-    public function getCategory(): Collection
+    public function getProducts(): Collection
     {
-        return $this->category;
+        return $this->products;
     }
 
-    public function addCategory(Product $category): self
+    public function addProduct(Product $product): self
     {
-        if (!$this->category->contains($category)) {
-            $this->category->add($category);
-            $category->setCategoryId($this);
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setCategoryId($this);
         }
 
         return $this;
     }
 
-    public function removeCategory(Product $category): self
+    public function removeProduct(Product $product): self
     {
-        if ($this->category->removeElement($category)) {
+        if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($category->getCategoryId() === $this) {
-                $category->setCategoryId(null);
+            if ($product->getCategoryId() === $this) {
+                $product->setCategoryId(null);
             }
         }
 
