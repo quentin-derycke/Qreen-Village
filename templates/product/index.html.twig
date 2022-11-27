@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Products
+	{{category.name}}
 {% endblock %}
 
 {% block body %}
@@ -30,7 +30,7 @@
 				<div class="card  bg-light  mb-3 me-4" style="max-width: 20rem;">
 					<div
 						class="card-body">
-						{# <a href="{{path('product_details', {'id' : product.id})}}"></a> #}
+						 <a href="{{path('product_details', { 'id' : product.id },)}}"> 
 						<h4 class="card-title">{{ product.name }}</h4>
 						<p class="card-text">{{product.description}}</p>
 

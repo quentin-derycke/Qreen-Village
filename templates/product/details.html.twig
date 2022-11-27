@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Products
+	{{product.name}}
 {% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
 			<li class="breadcrumb-item">
 				<a href="{{path('category_subcategories',{category : category.childs.id})}}">{{category.childs.name}}</a>
 			</li>
-			<li class="breadcrumb-item" aria-current='page'>{{category.name}}</li>
+			<li class="breadcrumb-item" aria-current='page'><a href="{{path('category_subcategories',{category : category.id})}}">{{category.name}}</a></li>
 			<li class="breadcrumb-item" aria-current='page'>{{product.name}}</li>
 		</ol>
 	</nav>
