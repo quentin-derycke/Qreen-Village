@@ -13,7 +13,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/connexion', name: 'security_login', methods: ['POST', 'GET'])]
+    #[Route('/login', name: 'security_login', methods: ['POST', 'GET'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         return $this->render('/security/login.html.twig', [
@@ -21,16 +21,16 @@ class SecurityController extends AbstractController
             'error' => $authenticationUtils->getLastAuthenticationError()
         ]);
     }
-    #[Route('/deconnexion', name: 'security_logout')]
+    #[Route('/logout', name: 'security_logout')]
     public function logout()
     {
         //Nothing to do here
     }
-    #[Route('/inscription', name: 'security_registration', methods: ['GET', 'POST'])]
+    #[Route('/registration', name: 'security_registration', methods: ['GET', 'POST'])]
     public function registration(EntityManagerInterface $manager, Request $request): Response
     {
         $user = new User();
-        $user->setRoles(['Role_User']);
+        $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
 
             return $this->redirectToRoute(('security_login'));
         }
-        return $this->render('pages/security/registration.html.twig', [
+        return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
         ]);
     }
