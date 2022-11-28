@@ -15,9 +15,9 @@
 				<a href="{{path('category_index')}}">Categories</a>
 			</li>
 			<li class="breadcrumb-item">
-				<a href="{{path('category_subcategories',{category : category.childs.id})}}">{{category.childs.name}}</a>
+				<a href="{{path('category_subcategories',{category : product.categoryId.childs.id})}}">{{product.categoryId.childs.name}}</a>
 			</li>
-			<li class="breadcrumb-item" aria-current='page'><a href="{{path('category_subcategories',{category : category.id})}}">{{category.name}}</a></li>
+			<li class="breadcrumb-item" aria-current='page'><a href="{{path('product_category',{category : product.categoryId.id})}}">{{product.categoryId.name}}</a></li>
 			<li class="breadcrumb-item" aria-current='page'>{{product.name}}</li>
 		</ol>
 	</nav>

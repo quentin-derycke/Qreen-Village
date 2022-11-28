@@ -18,22 +18,23 @@ class ProductController extends AbstractController
     {
 
         $products = $category->getProducts();
-
+        // dd($category);
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'category' => $category
         ]);
     }
     #[Route('/details/{id}', name: '_details')]
-    public function detail(ProductRepository $productRepository,   int $id): Response
+    public function detail(ProductRepository $productRepository,  int $id): Response
     {
         
         $product = $productRepository->find($id);
 
-
+// dd($product);
         return $this->render('product/details.html.twig', [
             'product' => $product,
-            
+            // 'category' => $category,
+           
 
 
         ]);
