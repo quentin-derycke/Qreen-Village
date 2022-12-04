@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Form\AddToCartType;
+use App\Manager\CartManager;
 use App\Repository\ProductRepository;
-use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,27 +20,47 @@ class ProductController extends AbstractController
     {
 
         $products = $category->getProducts();
+        
         // dd($category);
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'category' => $category
         ]);
+
+        
     }
     #[Route('/details/{id}', name: '_details')]
-    public function detail(ProductRepository $productRepository,  int $id): Response
-    {
-        
-        $product = $productRepository->find($id);
+    public function detail(
+        Product $product,
+        Request $request,
+        CartManager $cartManager
+    ): Response {
 
-// dd($product);
+
+        
+        $form = $this->createForm(AddToCartType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $item = $form->getData();
+            $item->setProduct($product);
+
+            $cart = $cartManager->getCurrentCart();
+            $cart
+                ->addItem($item)
+                ->setUpdatedAt(new \DateTime());
+
+            $cartManager->save($cart);
+
+            return $this->redirectToRoute('product_details', ['id' => $product->getId()]);
+        }
+
         return $this->render('product/details.html.twig', [
             'product' => $product,
-            // 'category' => $category,
-           
-
-
+            'form' => $form->createView()
         ]);
     }
- 
- 
+
+
 }
