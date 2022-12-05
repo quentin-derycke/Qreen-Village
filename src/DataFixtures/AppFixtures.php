@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Address;
 use Faker\Factory;
 use App\Entity\User;
 use Faker\Generator;
@@ -171,6 +172,7 @@ class AppFixtures extends Fixture
         }
 
         // ***  USERS  *** //
+        $users = [];
         for ($i = 0; $i < 10; $i++) {
             $user = new User();
             $user->setName($this->faker->name())
@@ -180,7 +182,20 @@ class AppFixtures extends Fixture
                 ->setEmail($this->faker->email())
                 ->setRoles(['ROLE_USER'])
                 ->setPlainpassword('password');
+                $users[] = $user;
             $manager->persist($user);
+        }
+
+        // *** ADDRESS *** // 
+
+        for($i = 0; $i < 10; $i++){
+             $address = new Address();
+             $address->setHouseNumber($this->faker->buildingNumber())
+                    ->setStreet($this->faker->streetName())
+                    ->setCity($this->faker->city())
+                    ->setZipcode($this->faker->buildingNumber())
+                    ->setUser($users[mt_rand(0, count($users) - 1)]);
+                    $manager->persist($address);
         }
 
         $manager->flush();

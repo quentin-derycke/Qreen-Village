@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profil Utilisateur
+{% endblock %}
+
+{% block body %}
+    
+    <section class="container mt-4">
+<div class="d-flex justify-content-center align-items-center">
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{user.name}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">{{user.lastname}}</h6>
+    <p class="card-text">{{user.phoneNumber}}</p>
+    <p class="card-text">{{user.birthdate | date("d/m/Y")}}</p>
+    <a href="{{(path('user_edit', { id: user.id}))}}" class="card-link">Edit Profil</a>
+    <a href="{{(path('user_edit_password', { id: user.id}))}}" class="card-link">Edit password</a>
+  </div>
+</div>
+</div>
+</section>
+{% endblock %}

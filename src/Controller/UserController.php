@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -100,4 +101,18 @@ class UserController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/utilisateur/info/{id}', name: 'user_profil', methods: ['GET'])]
+    public function info(
+        User $user, Request $request
+     ): Response
+    {
+       $user = $this->getUser();
+        
+      
+        return $this->render('user/info.html.twig', [
+          'user' => $user
+        ]);
+    }
+
 }
