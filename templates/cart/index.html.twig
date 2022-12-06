@@ -42,7 +42,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-fill mr-2 text-right">
-                                        <b>{{ item.vars.data.product.price }} €</b>
+                                        <b>{{ item.vars.data.product.price | format_currency('EUR', locale='de')}} </b>
                                     </div>
                                 </li>
                             {% endfor %}

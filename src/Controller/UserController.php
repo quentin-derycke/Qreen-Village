@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\User;
 use App\Form\UserEditType;
 use App\Form\UserPasswordType;
@@ -39,13 +40,13 @@ class UserController extends AbstractController
 
                 $this->addFlash(
                     'success',
-                    'Modification réussi'
+                    'Modification réussi.'
                 );
                 return $this->redirectToRoute('category_index');
             } else {
                 $this->addFlash(
                     'warning',
-                    'Le mot de passe incorrect'
+                    'Le mot de passe est incorrect.'
                 );
             }
         }
@@ -102,16 +103,15 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/utilisateur/info/{id}', name: 'user_profil', methods: ['GET'])]
+    #[Route('/utilisateur/info/', name: 'user_profil', methods: ['GET'])]
     public function info(
-        User $user, Request $request
+        
      ): Response
     {
-       $user = $this->getUser();
-        
+       
       
         return $this->render('user/info.html.twig', [
-          'user' => $user
+  
         ]);
     }
 

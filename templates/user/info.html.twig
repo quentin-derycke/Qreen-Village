@@ -7,17 +7,35 @@
 {% block body %}
     
     <section class="container mt-4">
-<div class="d-flex justify-content-center align-items-center">
+    <div class='row'>
+<div class="d-flex col  justify-content-center align-items-center">
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">{{user.name}}</h4>
-    <h6 class="card-subtitle mb-2 text-muted">{{user.lastname}}</h6>
-    <p class="card-text">{{user.phoneNumber}}</p>
-    <p class="card-text">{{user.birthdate | date("d/m/Y")}}</p>
-    <a href="{{(path('user_edit', { id: user.id}))}}" class="card-link">Edit Profil</a>
-    <a href="{{(path('user_edit_password', { id: user.id}))}}" class="card-link">Edit password</a>
+    <h4 class="card-title">{{app.user.name}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">{{app.user.lastname}}</h6>
+    <p class="card-text">{{app.user.phoneNumber}}</p>
+    <p class="card-text">{{app.user.birthdate | date("d/m/Y")}}</p>
+    <a href="{{(path('user_edit', { id: app.user.id}))}}" class="card-link">Edit Profil</a>
+    <a href="{{(path('user_edit_password', { id: app.user.id}))}}" class="card-link">Edit password</a>
   </div>
 </div>
 </div>
+{% for address in  app.user.addresses %}
+ <div class=" col  justify-content-center align-items-center">
+<div class="card">
+   <div class="card-body">
+    <h4 class="card-title">{{address.houseNumber}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">{{address.street}}</h6>
+    <p class="card-text">{{address.zipcode}}</p>
+    <p class="card-text">{{address.city}}</p>
+    <a href="{{(path('user_edit', { id: address.id}))}}" class="card-link">Edit Profil</a>
+
+  </div>
+</div>
+</div>
+
+<div>
+{% endfor %}
+
 </section>
 {% endblock %}
