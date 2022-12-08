@@ -5,127 +5,193 @@
 {% endblock %}
 
 {% block body %}
-	
-		<h1 class= 'mt-4'>
-			Checkout</h1>
 
-   <div class="container row">
+
+	<div class="container">
+		<h1 class='mt-4'>
+			Checkout
+		</h1>
+		<div
+			class="row">
 			<!-- Identification Form !-->
 			{% if app.user == false %}
-				<h1 class="mt-4">Identifier Vous</h1>
+				<h2 class="mt-4">
+					Login
+				</h2>
+				<section class="col-md-8 mt-4 ">
 
-				{% for message in app.flashes('success') %}
-					<div class="alert alert-success mt-4">
-						{{ message }}
-					</div>
-				{% endfor %}
 
-				{% if error %}
-					<div class="alert alert-danger mt-4">
-						{{ error.messageKey|trans(error.messageData, 'security') }}
-					</div>
-				{% endif %}
-
-				<form action="{{ path('security_login') }}" method="post" name="login">
-					<div class="form-group">
-						<label for="username" class="form-label mt-4">Adresse email</label>
-						<input type="email" class="form-control" id="username" name="_username" placeholder="yourmail@mail.fr" value="{{ last_username }}">
-					</div>
-					<div class="form-group">
-						<label for="password" class="form-label mt-4">Mot de passe</label>
-						<input type="password" class="form-control" id="password" name="_password" placeholder="********">
-					</div>
-		<input type="hidden" name="{{ path('checkout') }}" value="/account">
-					<button type="submit" class="btn btn-primary mt-4">
-						Se connecter
-					</button>
-				</form>
-				<div class="alert alert-dismissible alert-light  mt-2">
-					<strong>
-						Haven't registered ?</strong>
-					This
-					<a href="{{path('security_registration')}}" class="alert-link">Create a new user account
-					</a>.
-				</div>
-			</div>
-		{% endif %}
-		{% if app.user %}
-			<section class="container col-md-6 mt-4 ">
-				<div class='row'>
-					<div class=" justify-content-center align-items-center">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="card-title">{{app.user.name}}</h4>
-								<h6 class="card-subtitle mb-2 text-muted">{{app.user.lastname}}</h6>
-								<p class="card-text">{{app.user.phoneNumber}}</p>
-								<p class="card-text">{{app.user.birthdate | date("d/m/Y")}}</p>
-	
-							</div>
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success mt-4">
+							{{ message }}
 						</div>
-					</div>
-{% if app.user.addresses is empty %}
-	<div class="alert alert-dismissible alert-light  mt-2">		
-					<a href="" class="alert-link"><strong>
-					 Add your Delivery address</strong>
-					</a>.
-				</div>
+					{% endfor %}
 
-{% endif %}
-	<div class='container'>
-		<h1 class="mt-4">
-			Delivery Address</h1>
-		{{form(form)}}
-		</div>
-					<h4 class='mt-4'> Delivery Address</h4>
-			{% for address in  app.user.addresses %}
-						<div class=" col  justify-content-center align-items-center">
+					{% if error %}
+						<div class="alert alert-danger mt-4">
+							{{ error.messageKey|trans(error.messageData, 'security') }}
+						</div>
+					{% endif %}
+
+					<form action="{{ path('security_login') }}" method="post" name="login">
+						<div class="form-group">
+							<label for="username" class="form-label mt-4">
+								Email adress
+							</label>
+							<input type="email" class="form-control" id="username" name="_username" placeholder="yourmail@mail.fr" value="{{ last_username }}">
+						</div>
+						<div class="form-group">
+							<label for="password" class="form-label mt-4">
+								Password
+							</label>
+							<input type="password" class="form-control" id="password" name="_password" placeholder="********">
+						</div>
+						<input type="hidden" name="{{ path('checkout') }}" value="/account">
+						<button type="submit" class="btn btn-primary mt-4">
+							Connection
+						</button>
+					</form>
+					<div class="alert alert-dismissible alert-light  mt-2">
+						<strong>
+							Haven't registered ?
+						</strong>
+						This
+						<a href="{{path('security_registration')}}" class="alert-link">
+							Create a new user account.
+						</a>
+
+					</div>
+				</section>
+			{% endif %}
+			{% if app.user %}
+				<section class=" col-md-8 mt-4 ">
+					<div class='row'>
+						<div class=" justify-content-center align-items-center">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">{{address.houseNumber}}</h4>
-									<h6 class="card-subtitle mb-2 text-muted">{{address.street}}</h6>
-									<p class="card-text">{{address.zipcode}}</p>
-									<p class="card-text">{{address.city}}</p>
-									<a href="{{(path('user_edit', { id: address.id}))}}" class="card-link">Edit Profil</a>
+									<h4 class="card-title">
+										{{app.user.name}}
+									</h4>
+									<h6 class="card-subtitle mb-2 text-muted">
+										{{app.user.lastname}}
+									</h6>
+									<p class="card-text">
+										{{app.user.phoneNumber}}
+									</p>
+									<p class="card-text">
+										{{app.user.birthdate | date("d/m/Y")}}
+									</p>
 
 								</div>
 							</div>
 						</div>
+						{% if app.user.addresses is empty %}
+							<div class="alert alert-dismissible alert-light  mt-2">
+								<a href="" class="alert-link">
+									<strong>
+										Add your Delivery address.
+									</strong>
+								</a>
+								<div>
+									{{form(form)}}
+									</div>
+								</div>
 
-						<div>
-						{% endfor %}
+							{% endif %}
 
-					</section>
-				{% endif %}
 
-				  <!-- Order Resume-->
-		<section class="container  mt-4">
+							<h4 class='mt-4'>
+								Delivery Address
+							</h4>
+							{% for address in  app.user.addresses %}
+								<div class="   justify-content-center align-items-center mt-4">
+									<div class="card">
+										<div class="card-body">
+											<h4 class="card-title">
+												{{address.houseNumber}}
+											</h4>
+											<h6 class="card-subtitle mb-2 text-muted">
+												{{address.street}}
+											</h6>
+											<p class="card-text">
+												{{address.zipcode}}
+											</p>
+											<p class="card-text">
+												{{address.city}}
+											</p>
 
-		   <div class="card w-50">
-                        <div class="card-header bg-primary text-white d-flex  gap-2 align-items-center ">
-                            <h5>Order Resume</h5>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                        
-                            {% for item in cart.items %}
-                                <li class="list-group-item d-flex">
-                                    <div class="flex-fill">
-                                        <img  class=' img img-fluid w-75'src="https://via.placeholder.com/200x150" width="64" alt="Product image">
-                                    </div>
-                                    <div class="flex-fill mr-2">
-                                        <h5 class="mt-0 mb-0">{{ item.product.name }}</h5>
-                                        <small>{{ item.product.description[:50] }}...</small>
-                                                <p>{{item.quantity}}</p>
-												  <div class="flex-fill mr-2 text-right">
-                                        <b>{{ item.product.price | format_currency('EUR', locale='de')}} </b>
-                                    </div>
-                                            
-                                 
-                                  
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-				</section>
-			</div>
-		
-		{% endblock %}
+
+										</div>
+									</div>
+
+								</div>
+							{% endfor %}
+
+						</section>
+					{% endif %}
+
+					<!-- Order Resume-->
+					<section class=" col-md-4 mt-4 ">
+
+						<div class="card ">
+							<div class="card-header bg-primary text-white d-flex  gap-2 align-items-center ">
+								<h5>
+									Order Resume
+								</h5>
+							</div>
+							<ul class="list-group list-group-flush">
+
+								{% for item in cart.items %}
+									<li class="list-group-item d-flex">
+										<div class="flex-fill">
+											<img class=' img img-fluid w-75' src="https://via.placeholder.com/200x150" width="64" alt="Product image">
+										</div>
+										<div class="flex-fill mr-2">
+											<h5 class="mt-0 mb-0">
+												{{ item.product.name }}
+											</h5>
+											<small>
+												{{ item.product.description[:50] }}
+												...
+											</small>
+											<p>
+												{{item.quantity}}
+											</p>
+											<div class="flex-fill mr-2 text-right">
+												<b>
+													{{ item.product.price | format_currency('EUR', locale='de')}}
+												</b>
+											</div>
+
+
+										</li>
+									{% endfor %}
+
+								</ul>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item d-flex justify-content-between">
+										<div>
+											<b>
+												Total
+											</b>
+										</div>
+										<span>
+											<b>
+												{{ cart.total }}
+												€
+											</b>
+										</span>
+									</li>
+								</ul>
+							</div>
+						</section>
+						<div class="d-grid gap-2 col-8 my-4">
+							<button class=" btn btn-info  btn-lg align-items-center">
+								Continue
+							</button>
+						</div>
+					</div>
+
+				</div>
+
+			{% endblock %}

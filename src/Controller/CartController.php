@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class CartController extends AbstractController
 {
-   
+
     #[Route('/cart', name: 'cart')]
     public function index(CartManager $cartManager, Request $request): Response
     {
@@ -39,28 +39,28 @@ class CartController extends AbstractController
     #[Route('/cart/checkout', name: 'checkout')]
     public function checkout(
         AuthenticationUtils $authenticationUtils,
-         CartManager $cartManager,
-         Request $request,
-         EntityManagerInterface  $manager,
-    
-         ) : Response{
+        CartManager $cartManager,
+        Request $request,
+        EntityManagerInterface  $manager
 
-            $form = $this->createForm(AddressType::class);
-            $form->handleRequest($request);
-            if ($form->isSubmitted() &&  $form->isValid()) {
-    
-                $address = $form->getData();
-                $manager->persist($address);
-                $manager->flush();
-            }
-         
+    ): Response {
+
+        $form = $this->createForm(AddressType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() &&  $form->isValid()) {
+
+            $address = $form->getData();
+            $manager->persist($address);
+            $manager->flush();
+        }
+
         $cart = $cartManager->getCurrentCart();
         return $this->render('cart/checkout.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
             'cart' => $cart,
             'form' => $form->createView()
-       
+
         ]);
     }
 }

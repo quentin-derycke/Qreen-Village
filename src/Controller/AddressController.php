@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Address;
 use App\Form\AddressType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +14,7 @@ class AddressController extends AbstractController
 {
     #[Route('/address/{id}', name: 'address', methods: ['GET', 'POST'])]
     public function index(
-       
+
         Request $request,
         EntityManagerInterface  $manager,
         Address $address
@@ -24,7 +23,7 @@ class AddressController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-     
+
 
 
         $form = $this->createForm(AddressType::class, $address);
