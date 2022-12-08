@@ -27,7 +27,7 @@
 		{% for item in navCart.items %}<a class="list-group-item list-gorup-item-action flex-column align-items-start" >
 		<div class="d-flex w-100 justify-content-between"><h6>{{item.product.name}}</h6>
 		<p>{{item.product.price | format_currency('EUR', locale='de')}}</p>
-		<small> Quantity : {{item.quantity}}</small></div></a> {% endfor %}
+		<small>Quantity : {{item.quantity}}</small></div></a> {% endfor %}
 	</div>
 								<a class="nav-link " href="{{path('cart')}}">Mon panier</a>
 							
@@ -36,7 +36,6 @@
 					</li>
 				</div>
 			</ul>
-		</div>
 			<div class='d-flex me-4'>
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item dropdown">
@@ -59,10 +58,15 @@
 				</div>
 			</ul>
 		</div>
+			
+		</div>
 	</div>
+	
+	
 </nav>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-info justify-content-center">
-<ul class="nav  navbar-nav justify-content-center  ">
+<ul class="nav  navbar-nav  ">
 {% for category in liste_categories %}
 {% if category.childs == null  %}
 <li class="nav-item active"><a href="{{ path('category_subcategories',{'category': category.id })}}" class="nav-link">{{category.name}}</a></li>

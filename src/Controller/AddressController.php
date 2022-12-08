@@ -15,7 +15,7 @@ class AddressController extends AbstractController
 {
     #[Route('/address/{id}', name: 'address', methods: ['GET', 'POST'])]
     public function index(
-        User $user,
+       
         Request $request,
         EntityManagerInterface  $manager,
         Address $address
@@ -24,9 +24,7 @@ class AddressController extends AbstractController
             return $this->redirectToRoute('security_login');
         }
 
-        if ($this->getUser() !== $user) {
-            return $this->redirectToRoute("category_index");
-        }
+     
 
 
         $form = $this->createForm(AddressType::class, $address);
