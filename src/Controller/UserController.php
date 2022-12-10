@@ -27,7 +27,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute("category_index");
         }
 
-        
+
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() &&  $form->isValid()) {
@@ -55,7 +55,7 @@ class UserController extends AbstractController
     }
 
 
-  #[Route('/user/edit-password/{id}', 'user_edit_password', methods: ['GET', 'POST'])]
+    #[Route('/user/edit-password/{id}', 'user_edit_password', methods: ['GET', 'POST'])]
     public function editPassword(
         User $user,
         Request $request,
@@ -102,16 +102,11 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/utilisateur/info/', name: 'user_profil', methods: ['GET'])]
-    public function info(
-        
-     ): Response
+    #[Route('/user/info/', name: 'user_profil', methods: ['GET'])]
+    public function info(): Response
     {
-       
-      
-        return $this->render('user/info.html.twig', [
-  
-        ]);
-    }
 
+
+        return $this->render('user/info.html.twig', []);
+    }
 }

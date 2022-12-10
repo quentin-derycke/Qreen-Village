@@ -6,10 +6,12 @@ use App\Form\CartType;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Manager\CartManager;
+use App\Repository\AddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -41,19 +43,20 @@ class CartController extends AbstractController
         AuthenticationUtils $authenticationUtils,
         CartManager $cartManager,
         Request $request,
-        EntityManagerInterface  $manager
-
+        AddressRepository $addressRepository,
+        UserInterface $user
     ): Response {
 
-        $form = $this->createForm(AddressType::class);
+        $address = new Address();
+        $address->setUser($user);
+        $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
-        if ($form->isSubmitted() &&  $form->isValid()) {
 
-            $address = $form->getData();
-            $manager->persist($address);
-            $manager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $addressRepository->save($address, true);
+
+            return $this->redirectToRoute('user_profil', [], Response::HTTP_SEE_OTHER);
         }
-
         $cart = $cartManager->getCurrentCart();
         return $this->render('cart/checkout.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),

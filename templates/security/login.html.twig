@@ -6,7 +6,9 @@
 
 {% block body %}
 	<div class="container">
-		<h1 class="mt-4">Formulaire de connnexion</h1>
+		<h1 class="mt-4">
+			Formulaire de connnexion
+		</h1>
 
 		{% for message in app.flashes('success') %}
 			<div class="alert alert-success mt-4">
@@ -22,14 +24,18 @@
 
 		<form action="{{ path('security_login') }}" method="post" name="login">
 			<div class="form-group">
-				<label for="username" class="form-label mt-4">Adresse email</label>
+				<label for="username" class="form-label mt-4">
+					Adresse email
+				</label>
 				<input type="email" class="form-control" id="username" name="_username" placeholder="yourmail@mail.fr" value="{{ last_username }}">
 			</div>
 			<div class="form-group">
-				<label for="password" class="form-label mt-4">Mot de passe</label>
+				<label for="password" class="form-label mt-4">
+					Mot de passe
+				</label>
 				<input type="password" class="form-control" id="password" name="_password" placeholder="********">
 			</div>
-
+			<input type="hidden" name="{{ path('user_profil') }}" value="/account">
 			<button type="submit" class="btn btn-primary mt-4">
 				Se connecter
 			</button>

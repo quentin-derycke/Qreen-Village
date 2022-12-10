@@ -94,6 +94,8 @@
 								</a>
 								<div>
 									{{form(form)}}
+										<input type="hidden" name="{{ path('checkout') }}" value="/account">
+
 									</div>
 								</div>
 
@@ -103,9 +105,31 @@
 							<h4 class='mt-4'>
 								Delivery Address
 							</h4>
+
+							<select class="form-select" aria-label="Default select example">
+								<option selected>
+									Choice your delivery address
+								</option>
+								{% for address in  app.user.addresses %}
+									<option value="{{address.houseNumber}} {{address.street}} {{address.zipcode}} {{address.city}}">
+										{{address.houseNumber}}
+										{{address.street}}
+										{{address.zipcode}}
+										{{address.city}}
+									</option>
+								{% endfor %}
+								<option value="">
+									Two
+								</option>
+								<option value="3">
+									Three
+								</option>
+							</select>
+
 							{% for address in  app.user.addresses %}
 								<div class="   justify-content-center align-items-center mt-4">
-									<div class="card">
+
+									<div class="card mt-4">
 										<div class="card-body">
 											<h4 class="card-title">
 												{{address.houseNumber}}

@@ -5,7 +5,32 @@
 {% block body %}
 	<div class='container'>
 		<h1 class="mt-4">
-			Formulaire d'inscription</h1>
-		{{form(form)}}
-		</div>
-	{% endblock %}
+			Formulaire d'inscription
+		</h1>
+		{{form_start(form)}}
+		<form class="form-group">
+			{{form_row(form.email)}}
+			<div class="row">
+				<div class="col">
+					{{form_row(form.lastname)}}
+				</div>
+				<div class="col">
+					{{form_row(form.name)}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					{{form_row(form.birthdate)}}
+				</div>
+				<div class="col">
+					{{form_row(form.phoneNumber)}}
+				</div>
+			</div>
+
+			{{form_row(form.plainPassword)}}
+
+			{{form_end(form)}}
+		</form>
+
+	</div>
+{% endblock %}

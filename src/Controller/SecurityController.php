@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,7 @@ class SecurityController extends AbstractController
     public function registration(EntityManagerInterface $manager, Request $request): Response
     {
         $user = new User();
+
         $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
@@ -46,6 +48,7 @@ class SecurityController extends AbstractController
 
             return $this->redirectToRoute(('security_login'));
         }
+
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
         ]);
