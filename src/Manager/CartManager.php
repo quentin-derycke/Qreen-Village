@@ -17,7 +17,7 @@ class CartManager
     /**
      * @var OrderFactory
      */
-    private $cartFactory;
+    public $cartFactory;
 
     /**
      * @var EntityManagerInterface
@@ -62,4 +62,8 @@ class CartManager
         // Persist in session
         $this->cartSessionStorage->setCart($cart);
     }
+
+    // public function address(Order $cart)
+    // {
+    // }
 }

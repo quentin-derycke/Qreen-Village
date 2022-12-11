@@ -105,117 +105,118 @@
 							<h4 class='mt-4'>
 								Delivery Address
 							</h4>
+							{{form(orderAddress)}}
 
-							<select class="form-select" aria-label="Default select example">
-								<option selected>
-									Choice your delivery address
-								</option>
-								{% for address in  app.user.addresses %}
-									<option value="{{address.houseNumber}} {{address.street}} {{address.zipcode}} {{address.city}}">
-										{{address.houseNumber}}
-										{{address.street}}
-										{{address.zipcode}}
-										{{address.city}}
+								<select class="form-select" aria-label="Default select example">
+									<option selected>
+										Choice your delivery address
 									</option>
-								{% endfor %}
-								<option value="">
-									Two
-								</option>
-								<option value="3">
-									Three
-								</option>
-							</select>
+									{% for address in  app.user.addresses %}
+										<option value="{{address.houseNumber}} {{address.street}} {{address.zipcode}} {{address.city}}">
+											{{address.houseNumber}}
+											{{address.street}}
+											{{address.zipcode}}
+											{{address.city}}
+										</option>
+									{% endfor %}
+									<option value="">
+										Two
+									</option>
+									<option value="3">
+										Three
+									</option>
+								</select>
 
-							{% for address in  app.user.addresses %}
-								<div class="   justify-content-center align-items-center mt-4">
+								{% for address in  app.user.addresses %}
+									<div class="   justify-content-center align-items-center mt-4">
 
-									<div class="card mt-4">
-										<div class="card-body">
-											<h4 class="card-title">
-												{{address.houseNumber}}
-											</h4>
-											<h6 class="card-subtitle mb-2 text-muted">
-												{{address.street}}
-											</h6>
-											<p class="card-text">
-												{{address.zipcode}}
-											</p>
-											<p class="card-text">
-												{{address.city}}
-											</p>
+										<div class="card mt-4">
+											<div class="card-body">
+												<h4 class="card-title">
+													{{address.houseNumber}}
+												</h4>
+												<h6 class="card-subtitle mb-2 text-muted">
+													{{address.street}}
+												</h6>
+												<p class="card-text">
+													{{address.zipcode}}
+												</p>
+												<p class="card-text">
+													{{address.city}}
+												</p>
 
 
+											</div>
 										</div>
+
 									</div>
+								{% endfor %}
 
+							</section>
+						{% endif %}
+
+						<!-- Order Resume-->
+						<section class=" col-md-4 mt-4 ">
+
+							<div class="card ">
+								<div class="card-header bg-primary text-white d-flex  gap-2 align-items-center ">
+									<h5>
+										Order Resume
+									</h5>
 								</div>
-							{% endfor %}
+								<ul class="list-group list-group-flush">
 
-						</section>
-					{% endif %}
+									{% for item in cart.items %}
+										<li class="list-group-item d-flex">
+											<div class="flex-fill">
+												<img class=' img img-fluid w-75' src="https://via.placeholder.com/200x150" width="64" alt="Product image">
+											</div>
+											<div class="flex-fill mr-2">
+												<h5 class="mt-0 mb-0">
+													{{ item.product.name }}
+												</h5>
+												<small>
+													{{ item.product.description[:50] }}
+													...
+												</small>
+												<p>
+													{{item.quantity}}
+												</p>
+												<div class="flex-fill mr-2 text-right">
+													<b>
+														{{ item.product.price | format_currency('EUR', locale='de')}}
+													</b>
+												</div>
 
-					<!-- Order Resume-->
-					<section class=" col-md-4 mt-4 ">
 
-						<div class="card ">
-							<div class="card-header bg-primary text-white d-flex  gap-2 align-items-center ">
-								<h5>
-									Order Resume
-								</h5>
-							</div>
-							<ul class="list-group list-group-flush">
+											</li>
+										{% endfor %}
 
-								{% for item in cart.items %}
-									<li class="list-group-item d-flex">
-										<div class="flex-fill">
-											<img class=' img img-fluid w-75' src="https://via.placeholder.com/200x150" width="64" alt="Product image">
-										</div>
-										<div class="flex-fill mr-2">
-											<h5 class="mt-0 mb-0">
-												{{ item.product.name }}
-											</h5>
-											<small>
-												{{ item.product.description[:50] }}
-												...
-											</small>
-											<p>
-												{{item.quantity}}
-											</p>
-											<div class="flex-fill mr-2 text-right">
+									</ul>
+									<ul class="list-group list-group-flush">
+										<li class="list-group-item d-flex justify-content-between">
+											<div>
 												<b>
-													{{ item.product.price | format_currency('EUR', locale='de')}}
+													Total
 												</b>
 											</div>
-
-
+											<span>
+												<b>
+													{{ cart.total }}
+													€
+												</b>
+											</span>
 										</li>
-									{% endfor %}
-
-								</ul>
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item d-flex justify-content-between">
-										<div>
-											<b>
-												Total
-											</b>
-										</div>
-										<span>
-											<b>
-												{{ cart.total }}
-												€
-											</b>
-										</span>
-									</li>
-								</ul>
+									</ul>
+								</div>
+							</section>
+							<div class="d-grid gap-2 col-8 my-4">
+								<button class=" btn btn-info  btn-lg align-items-center">
+									Continue
+								</button>
 							</div>
-						</section>
-						<div class="d-grid gap-2 col-8 my-4">
-							<button class=" btn btn-info  btn-lg align-items-center">
-								Continue
-							</button>
 						</div>
+
 					</div>
 
-				</div>
-
-			{% endblock %}
+				{% endblock %}

@@ -2,11 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Form\CartType;
 use App\Entity\Address;
+use App\Entity\Product;
+use App\Form\OrderType;
 use App\Form\AddressType;
+
 use App\Manager\CartManager;
+use App\Repository\OrderRepository;
 use App\Repository\AddressRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,25 +50,51 @@ class CartController extends AbstractController
         CartManager $cartManager,
         Request $request,
         AddressRepository $addressRepository,
-        UserInterface $user
+        UserInterface $user,
+        ProductRepository $product,
+        OrderRepository $orderRepository
+
     ): Response {
 
         $address = new Address();
         $address->setUser($user);
+
+
+
+        // Empty address From
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->save($address, true);
 
             return $this->redirectToRoute('user_profil', [], Response::HTTP_SEE_OTHER);
         }
+
+
+
         $cart = $cartManager->getCurrentCart();
+
+
+        // OrderAddress Form
+        $order = $cart;
+
+        $orderAddressForm = $this->createForm(OrderType::class, $order);
+        $orderAddressForm->handleRequest($request);
+
+
+
+        if ($orderAddressForm->isSubmitted() && $orderAddressForm->isValid()) {
+            $orderRepository->save($order, true);
+        }
+
         return $this->render('cart/checkout.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
             'cart' => $cart,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'orderAddress' => $orderAddressForm->createView()
 
         ]);
     }

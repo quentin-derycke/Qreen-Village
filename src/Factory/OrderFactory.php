@@ -5,6 +5,7 @@ namespace App\Factory;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\OrderItem;
+use App\Entity\Address;
 
 
 // The OrderFactory factory will help us to create Order and OrderItem entities with default data. It also allows you to change the Order entity easily.
@@ -32,6 +33,7 @@ class OrderFactory
         return $order;
     }
 
+
     /**
      * Creates an item for a product.
      *
@@ -46,5 +48,21 @@ class OrderFactory
         $item->setQuantity(1);
 
         return $item;
+    }
+    /**
+     * Edits an order with a new status and address.
+     *
+     * @param Order $order
+     * @param Address $address
+     *
+     * @return Order
+     */
+    public function edit(Order $order,  Address $address): Order
+    {
+        $order->setStatus(Order::STATUS_CHECK);
+        $order->setAddress($address);
+        $order->setUpdatedAt(new \DateTime());
+
+        return $order;
     }
 }

@@ -29,11 +29,19 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $status = self::STATUS_CART;
 
+    #[ORM\ManyToOne]
+    private ?Address $address = null;
+
     /**
      * An Order in progress, not placed yet
      */
 
     const STATUS_CART = 'cart';
+
+    /**
+     *  Checkout Order
+     */
+    const STATUS_CHECK = 'delivery';
 
     public function __construct()
     {
@@ -83,7 +91,7 @@ class Order
 
         return $this;
     }
-    
+
     /**
      * Removes all items from the order.
      *
@@ -133,7 +141,7 @@ class Order
 
         return $this;
     }
-        /**
+    /**
      * Calculates the order total.
      */
     public function getTotal(): float
@@ -145,5 +153,17 @@ class Order
         }
 
         return $total;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 }
