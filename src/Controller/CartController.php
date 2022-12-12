@@ -51,7 +51,7 @@ class CartController extends AbstractController
         Request $request,
         AddressRepository $addressRepository,
         UserInterface $user,
-        ProductRepository $product,
+        
         OrderRepository $orderRepository
 
     ): Response {

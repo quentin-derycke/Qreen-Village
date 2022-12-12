@@ -35,6 +35,7 @@ class OrderType extends AbstractType
                         ->orderBy('a.houseNumber', 'ASC')
                         ->setParameter('user', $this->token->getToken()->getUser());
                 },
+                'attr' => [ 'class' => 'form-control'],
                 'label' => "Delivery Address",
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -42,7 +43,7 @@ class OrderType extends AbstractType
                 'choice_label' => function (Address $address) {
                     return $address->getHouseNumber() . ' ' .
                         $address->getStreet()
-                        . ' ' . $address->getZipcode()
+                        . ' ' . $address->getCity()
                         . ' ' . $address->getZipcode();
                 },
                 'multiple' => false,

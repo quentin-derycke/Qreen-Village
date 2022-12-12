@@ -14,55 +14,7 @@
 		<div
 			class="row">
 			<!-- Identification Form !-->
-			{% if app.user == false %}
-				<h2 class="mt-4">
-					Login
-				</h2>
-				<section class="col-md-8 mt-4 ">
-
-
-					{% for message in app.flashes('success') %}
-						<div class="alert alert-success mt-4">
-							{{ message }}
-						</div>
-					{% endfor %}
-
-					{% if error %}
-						<div class="alert alert-danger mt-4">
-							{{ error.messageKey|trans(error.messageData, 'security') }}
-						</div>
-					{% endif %}
-
-					<form action="{{ path('security_login') }}" method="post" name="login">
-						<div class="form-group">
-							<label for="username" class="form-label mt-4">
-								Email adress
-							</label>
-							<input type="email" class="form-control" id="username" name="_username" placeholder="yourmail@mail.fr" value="{{ last_username }}">
-						</div>
-						<div class="form-group">
-							<label for="password" class="form-label mt-4">
-								Password
-							</label>
-							<input type="password" class="form-control" id="password" name="_password" placeholder="********">
-						</div>
-						<input type="hidden" name="{{ path('checkout') }}" value="/account">
-						<button type="submit" class="btn btn-primary mt-4">
-							Connection
-						</button>
-					</form>
-					<div class="alert alert-dismissible alert-light  mt-2">
-						<strong>
-							Haven't registered ?
-						</strong>
-						This
-						<a href="{{path('security_registration')}}" class="alert-link">
-							Create a new user account.
-						</a>
-
-					</div>
-				</section>
-			{% endif %}
+			
 			{% if app.user %}
 				<section class=" col-md-8 mt-4 ">
 					<div class='row'>
@@ -86,72 +38,37 @@
 							</div>
 						</div>
 						{% if app.user.addresses is empty %}
-							<div class="alert alert-dismissible alert-light  mt-2">
-								<a href="" class="alert-link">
+							<div class="alert alert-dismissible alert-light  mt-4">
+								<h4 href="" class="alert-link">
 									<strong>
-										Add your Delivery address.
+										Add your address.
 									</strong>
-								</a>
+								</h4>
 								<div>
-									{{form(form)}}
+									{{ form_start(form)}}
+
+									{{form_row(form.houseNumber)}}
+									{{form_row(form.street)}}
+									{{form_row(form.city)}}
+									{{form_row(form.zipcode)}}
+								
+
 										<input type="hidden" name="{{ path('checkout') }}" value="/account">
 
 									</div>
 								</div>
 
-							{% endif %}
+							{% else %}
 
 
+			
 							<h4 class='mt-4'>
-								Delivery Address
+								 Choice your Delivery Address
 							</h4>
 							{{form(orderAddress)}}
 
-								<select class="form-select" aria-label="Default select example">
-									<option selected>
-										Choice your delivery address
-									</option>
-									{% for address in  app.user.addresses %}
-										<option value="{{address.houseNumber}} {{address.street}} {{address.zipcode}} {{address.city}}">
-											{{address.houseNumber}}
-											{{address.street}}
-											{{address.zipcode}}
-											{{address.city}}
-										</option>
-									{% endfor %}
-									<option value="">
-										Two
-									</option>
-									<option value="3">
-										Three
-									</option>
-								</select>
-
-								{% for address in  app.user.addresses %}
-									<div class="   justify-content-center align-items-center mt-4">
-
-										<div class="card mt-4">
-											<div class="card-body">
-												<h4 class="card-title">
-													{{address.houseNumber}}
-												</h4>
-												<h6 class="card-subtitle mb-2 text-muted">
-													{{address.street}}
-												</h6>
-												<p class="card-text">
-													{{address.zipcode}}
-												</p>
-												<p class="card-text">
-													{{address.city}}
-												</p>
-
-
-											</div>
-										</div>
-
-									</div>
-								{% endfor %}
-
+						{% endif %}
+								
 							</section>
 						{% endif %}
 
