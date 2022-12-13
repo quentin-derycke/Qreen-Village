@@ -1,19 +1,30 @@
-function callAPI(endpoint) {
+const houseNumber = document.getElementById('address_houseNumber')
+const street = document.getElementById('address_street')
+const city = document.getElementById('address_city')
+const zipcode = document.getElementById('address_zipcode')
 
-    
-        return fetch("https://api-adresse.data.gouv.fr/" + endpoint, {
-            headers: {
-              // On inclut notre clé d'API dans les headers de la requête
-              "Authorization": "Bearer "
-            }
-          })
-          
 
-    .then(response => response.json())
+
+function toZipcode(zipcode, city) {
+
+
+const apiUrl =  'https://geo.api.gouv.fr/communes?codePostal='
+
+  fetch(apiUrl+zipcode).then(response=>{
+
+      response.json().then(json => {
+
+          city.innerHTML = "";
+
+          for (let i=0; i<json.length; i++) {
+              city.innerHTML += `<option value="${json[i].nom}">${json[i].nom}</option>`;
+          }
+      })
+  })
+}
+if (zipcode) {zipcode.addEventListener("keyup", () => {
+  toZipcode(zipcode.value, city);
+});
 }
 
-callAPI("search/?q=1+avenue+de+la+gare+75001+Paris").then(function(adresses) {
-    // La réponse de l'API contient une liste d'adresses correspondant à la recherche
-    console.log(adresses);
-  });
-  
+console.log(toZipcode())
