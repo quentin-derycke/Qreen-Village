@@ -23,6 +23,13 @@
 	</nav>
 
 	<section class='container py-5 px-lg-5 my-5  align-items-center'>
+
+	{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
+		
 	<div class='row'>
 	<div class='col-md-6'>
 <img src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="dummy" class="car-img-top img-thumbnail img mb-5-md-0">

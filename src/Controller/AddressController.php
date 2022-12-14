@@ -10,13 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 
 #[Route('/address')]
 class AddressController extends AbstractController
 {
-
+    #[Security("is_granted('ROLE_USER') and user === user ")]
     #[Route('/new', name: 'address_new', methods: ['GET', 'POST'])]
 
     public function add(
@@ -36,10 +37,18 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->save($address, true);
+            $this->addFlash(
+                'success',
+                'Nouvelle Adresse est enregistré.'
+            );
 
             return $this->redirectToRoute('user_profil', [], Response::HTTP_SEE_OTHER);
+        } else {
+            $this->addFlash(
+                'warning',
+                "Votre addresse est incorrecte"
+            );
         }
-
         return $this->render('address/new.html.twig', [
             'address' => $address,
             'form' => $form->createView(),

@@ -49,7 +49,10 @@ class ProductController extends AbstractController
                 ->setUpdatedAt(new \DateTime());
 
             $cartManager->save($cart);
-
+            $this->addFlash(
+                'success',
+                'Produit ajouté au panier.'
+            );
             return $this->redirectToRoute('product_details', ['id' => $product->getId()]);
         }
 
