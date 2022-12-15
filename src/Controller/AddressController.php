@@ -55,18 +55,26 @@ class AddressController extends AbstractController
         ]);
     }
 
-
+    #[Security("is_granted('ROLE_USER') and user === user ")]
     #[Route('/{id}', name: 'address', methods: ['GET', 'POST'])]
     public function edit(
 
         Request $request,
         EntityManagerInterface  $manager,
-        Address $address
+        Address $address,
+        
     ): Response {
+
+
+      $user=  $address->getUser();
+
+      
         if (!$this->getUser()) {
             return $this->redirectToRoute('security_login');
         }
-
+        if ($this->getUser() !== $user) {
+            return $this->redirectToRoute("category_index");
+      }
 
 
 
