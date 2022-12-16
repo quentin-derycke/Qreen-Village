@@ -7,30 +7,37 @@
 		<h1 class="mt-4">
 			Formulaire d'inscription
 		</h1>
-		{{form_start(form)}}
+		{{form_start(form, { 'attr': { 'id' : 'registration'}})}}
 		<form class="form-group">
 			{{form_row(form.email)}}
+			<span id='emailError'></span>
 			<div class="row">
 				<div class="col">
 					{{form_row(form.lastname)}}
+					<span class="invalid-feedback" id="lastNameError"></span>
 				</div>
 				<div class="col">
 					{{form_row(form.name)}}
+					<span class="invalid-feedback" id="nameError"></span>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					{{form_row(form.birthdate)}}
+					<span class="invalid-feedback" id="birthError"></span>
 				</div>
 				<div class="col">
 					{{form_row(form.phoneNumber)}}
+					<span  class='invalid-feedback'id="phoneError"></span>
 				</div>
 			</div>
 
 			{{form_row(form.plainPassword)}}
-
+<span style= 'color:red' id="passwordError"></span>
+<span class='invalid-feedback' id="passConfError"></span>
 			{{form_end(form)}}
 		</form>
 
 	</div>
+	<script src="/js/RegistrationForm.js"></script>
 {% endblock %}
