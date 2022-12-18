@@ -16,6 +16,14 @@ class UserPasswordType extends AbstractType
     {
         $builder
             ->add('plainPassword', RepeatedType::class, [
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 8, 'max' => 50]),
+                    new Assert\Regex([
+                        'pattern' => '/^(?=.*[0-9])(?=.*[A-Z])(?=.{8,})/',
+                        'message' => 'Le mot de passe doit contenir au moins un chiffre, une majuscule et 8 caractères',
+                    ]),
+                ],
                 'type' => PasswordType::class,
                 'first_options' =>
                 [
@@ -41,10 +49,18 @@ class UserPasswordType extends AbstractType
                 'invalid_message' => 'les mdps ne correspondent pas'
             ])
             ->add('newPassword', PasswordType::class, [
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 8, 'max' => 50]),
+                    new Assert\Regex([
+                        'pattern' => '/^(?=.*[0-9])(?=.*[A-Z])(?=.{8,})/',
+                        'message' => 'Le mot de passe doit contenir au moins un chiffre, une majuscule et 8 caractères',
+                    ]),
+                ],
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Nouveau mot de passe',
                 'label_attr' => ['class' => 'form-label mt-4'],
-                'constraints' => [new Assert\NotBlank()]
+
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

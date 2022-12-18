@@ -46,7 +46,11 @@ class UserEditType extends AbstractType
                 'label' => 'Date de naissance',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Date(),
+                ],
             ])
 
             ->add('phoneNumber', TextType::class, [
@@ -61,12 +65,23 @@ class UserEditType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Length(['min' => 6, 'max' => 30])
+                    new Assert\Length(['min' => 6, 'max' => 30]),
+                    new Assert\Regex([
+                        'pattern' => '/^[0-9]{10,15}$/',
+                        'message' => 'Veuillez entrer un numéro de téléphone valide',
+                    ])
                 ]
 
             ])
             ->add('plainPassword',  PasswordType::class, [
-
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 8, 'max' => 50]),
+                    new Assert\Regex([
+                        'pattern' => '/^(?=.*[0-9])(?=.*[A-Z])(?=.{8,})/',
+                        'message' => 'Le mot de passe est Incorrecte',
+                    ]),
+                ],
                 'attr' => [
                     'class' => 'form-control'
                 ],

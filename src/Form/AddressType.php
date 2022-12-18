@@ -35,7 +35,6 @@ class AddressType extends AbstractType
         'label_attr' => ['class' => 'form-label mt-4']])
         ->add('city', ChoiceType::class, ['attr' => [
             'class' => 'form-control mt-4',
-            'attr' => 'city'
         ],
         'multiple' => false,
         'expanded' => false,

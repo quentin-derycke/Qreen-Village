@@ -80,10 +80,42 @@ class RegistrationType extends AbstractType
                 'label' => 'Date de naissance',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                   
+                ],
+            ])  
+            ->add('phoneNumber', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlenght' => '6',
+                    'maxlenght' => '30'
+                ],
+                'label' => 'Numéro de telephone',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 6, 'max' => 30]),
+                    new Assert\Regex([
+                        'pattern' => '/^[0-9]{10,15}$/',
+                        'message' => 'Veuillez entrer un numéro de téléphone valide',
+                    ])
                 ]
+
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length(['min' => 8, 'max' => 50]),
+                    new Assert\Regex([
+                        'pattern' => '/^(?=.*[0-9])(?=.*[A-Z])(?=.{8,})/',
+                        'message' => 'Le mot de passe doit contenir au moins un chiffre, une majuscule et 8 caractères',
+                    ]),
+                ],
                 'first_options' =>
                 [
 
@@ -107,22 +139,7 @@ class RegistrationType extends AbstractType
                 ],
                 'invalid_message' => 'les mdps ne correspondent pas'
             ])
-            ->add('phoneNumber', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlenght' => '6',
-                    'maxlenght' => '30'
-                ],
-                'label' => 'Numéro de telephone',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min' => 6, 'max' => 30])
-                ]
 
-            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
