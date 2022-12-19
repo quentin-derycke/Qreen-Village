@@ -63,7 +63,5 @@ class CartManager
         $this->cartSessionStorage->setCart($cart);
     }
 
-    // public function address(Order $cart)
-    // {
-    // }
+ 
 }

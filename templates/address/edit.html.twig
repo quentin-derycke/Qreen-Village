@@ -6,12 +6,24 @@
 
 
 {% block body %}
-	<div class='container'>
-		<h1 class="mt-4">
-			Delivery Address
-		</h1>
-		{{form(form)}}
-		</div>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-		<script src='/js/apiCall.js'> 
+<div class='container'>
+	<h1 class="mt-4">
+		Delivery Address
+	</h1>
+		{{form_start(form, { 'attr': { 'id' : 'address_form'}})}}
+			
+			{{form_row(form.houseNumber)}}
+			<span class="" id="houseError"></span>
+			{{form_row(form.street)}}
+			<span class="" id="streetError"></span>
+
+			{{form_row(form.zipcode)}}
+			<span class="" id="zipError"></span>
+
+			{{form_row(form.city)}}
+			{{form_row(form.save)}}
+			{{form_end(form)}}
+</div>
+<script src='/js/apiCall.js'></script>
+<script src= '/js/AddressForm.js'></script>
 	{% endblock %}

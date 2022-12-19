@@ -27,17 +27,22 @@ class AddressType extends AbstractType
         ],
         'label' => 'Street',
         'label_attr' => ['class' => 'form-label mt-4']])
-        ->add('zipcode', TextType::class,  ['attr' => [
-            'class' => 'form-control mt-4',
-          
-        ],
+
+        ->add('zipcode', TextType::class,  [
+            'attr' => [
+                'class' => 'form-control mt-4',
+            ],
         'label' => 'Zipcode',
-        'label_attr' => ['class' => 'form-label mt-4']])
-        ->add('city', ChoiceType::class, ['attr' => [
-            'class' => 'form-control mt-4',
-        ],
-        'multiple' => false,
-        'expanded' => false,
+        'label_attr' => [
+            'class' => 'form-label mt-4'
+            ]
+        ])
+
+        ->add('city', ChoiceType::class, [
+              'attr' => [
+                'class' => 'form-control mt-4',
+            ],
+        
         'label' => 'City',
         'label_attr' => ['class' => 'form-label mt-4']])
         ->addEventListener(

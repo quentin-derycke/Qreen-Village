@@ -56,7 +56,7 @@ class AddressController extends AbstractController
     }
 
     #[Security("is_granted('ROLE_USER') and user === user ")]
-    #[Route('/{id}', name: 'address', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'address', methods: ['GET', 'POST'])]
     public function edit(
 
         Request $request,
@@ -85,6 +85,12 @@ class AddressController extends AbstractController
             $address = $form->getData();
             $manager->persist($address);
             $manager->flush();
+            $this->addFlash(
+                'success',
+                'Adresse modifié'
+            );
+
+            return $this->redirectToRoute('user_profil', [], Response::HTTP_SEE_OTHER);
         }
 
 

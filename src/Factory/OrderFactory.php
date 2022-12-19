@@ -53,14 +53,12 @@ class OrderFactory
      * Edits an order with a new status and address.
      *
      * @param Order $order
-     * @param Address $address
      *
      * @return Order
      */
-    public function edit(Order $order,  Address $address): Order
+    public function edit($order): Order
     {
         $order->setStatus(Order::STATUS_CHECK);
-        $order->setAddress($address);
         $order->setUpdatedAt(new \DateTime());
 
         return $order;

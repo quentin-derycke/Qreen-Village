@@ -79,7 +79,7 @@ class CartController extends AbstractController
 
         // OrderAddress Form
         $order = $cart;
-
+        
         $orderAddressForm = $this->createForm(OrderType::class, $order);
         $orderAddressForm->handleRequest($request);
 
@@ -89,12 +89,14 @@ class CartController extends AbstractController
             $orderRepository->save($order, true);
         }
 
+       
         return $this->render('cart/checkout.html.twig', [
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
             'cart' => $cart,
             'form' => $form->createView(),
-            'orderAddress' => $orderAddressForm->createView()
+            'orderAddress' => $orderAddressForm->createView(),
+            
 
         ]);
     }
