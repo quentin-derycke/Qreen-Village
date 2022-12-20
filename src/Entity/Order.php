@@ -32,6 +32,9 @@ class Order
     #[ORM\ManyToOne]
     private ?Address $address = null;
 
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?User $user = null;
+
     /**
      * An Order in progress, not placed yet
      */
@@ -163,6 +166,18 @@ class Order
     public function setAddress(?Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

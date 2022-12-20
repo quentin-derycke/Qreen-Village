@@ -14,10 +14,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+#[Route('/user', name: 'user')]
 class UserController extends AbstractController
 {
     #[Security("is_granted('ROLE_USER') and user === choosenUser ")]
-    #[Route('/user/edit/{id}', name: 'user_edit')]
+    #[Route('/edit/{id}', name: '_edit')]
     public function edit(User $choosenUser, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
     {
 
@@ -57,7 +58,7 @@ class UserController extends AbstractController
     }
 
     #[Security("is_granted('ROLE_USER')  and user === choosenUser ")]
-    #[Route('/user/edit-password/{id}', 'user_edit_password', methods: ['GET', 'POST'])]
+    #[Route('/edit-password/{id}', '_edit_password', methods: ['GET', 'POST'])]
     public function editPassword(
         User $choosenUser,
         Request $request,
@@ -110,11 +111,19 @@ class UserController extends AbstractController
     }
 
     #[Security("is_granted('ROLE_USER')")]
-    #[Route('/user/info/', name: 'user_profil', methods: ['GET'])]
+    #[Route('/info/', name: '_profil', methods: ['GET'])]
     public function info(): Response
     {
 
 
         return $this->render('user/info.html.twig', []);
+    }
+    #[Security("is_granted('ROLE_USER')")]
+    #[Route('/info/orders', name: '_orders', methods: ['GET'])]
+    public function orders(): Response
+    {
+
+
+        return $this->render('user/orders.html.twig', []);
     }
 }
