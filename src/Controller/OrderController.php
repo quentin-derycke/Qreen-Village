@@ -22,8 +22,9 @@ class OrderController extends AbstractController
 
         // On met à jour le statut de la commande 
         $order =  $orderRepository->findOneById($id);
-        $order->setStatus(Order::STATUS_CHECK);
-        $order->setUpdatedAt(new \DateTime());
+        $orderFactory->edit($order);
+        //$order->setStatus(Order::STATUS_CHECK);
+        //$order->setUpdatedAt(new \DateTime());
 
 
 // On  la lie à l'utilisateur : 

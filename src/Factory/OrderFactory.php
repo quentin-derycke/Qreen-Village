@@ -54,7 +54,7 @@ class OrderFactory
     /**
      * Edits an order with a new status and address.
      *
-     * @param Order $order
+     * @param Order $order Id Object of order  
      *
      * @return Order
      */
