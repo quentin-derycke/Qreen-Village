@@ -3,15 +3,10 @@
 {% block title %}Hello OrderController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-   {{dump(order.items)}}
-
+<div class="container">
+ 
   <!-- Order Resume-->
+					<!-- Order Resume-->
 					<section class=" col-md-4 mt-4 ">
 
 						<div class="card ">
@@ -20,7 +15,64 @@
 									Order Resume
 								</h5>
 							</div>
-				
+							<ul class="list-group list-group-flush">
+
+								{% for item in order.items %}
+									<li class="list-group-item d-flex">
+										<div class="flex-fill">
+											<img class=' img img-fluid w-75' src="https://via.placeholder.com/200x150" width="64" alt="Product image">
+										</div>
+										<div class="flex-fill mr-2">
+											<h5 class="mt-0 mb-0">
+												{{ item.product.name }}
+											</h5>
+											<small>
+												{{ item.product.description[:50] }}
+												...
+											</small>
+											<p>
+												{{item.quantity}}
+											</p>
+											<div class="flex-fill mr-2 text-right">
+												<b>
+													{{ item.product.price | format_currency('EUR')}}
+												</b>
+											</div>
+
+
+										</li>
+									{% endfor %}
+
+								</ul>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item d-flex justify-content-between">
+										<div>
+											<b>
+												Total
+											</b>
+										</div>
+										<span>
+											<b>
+												{{ order.total }}
+												€
+											</b>
+										</span>
+									</li>
+								</ul>
+							</div>
+						</section>
+						<div class="d-grid gap-2 col-8 my-4">
+							<a href='#' class=" btn btn-info  btn-lg align-items-center">
+								Continue
+							</a>
+						</div>
+
+					</div>
+					<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+					<script src='/js/apiCall.js'></script>
+					</div>
+						{% endblock %}
+
   
 							
-{% endblock %}
+

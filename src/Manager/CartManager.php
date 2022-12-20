@@ -13,7 +13,7 @@ class CartManager
      * @var CartSessionStorage
      */
     private $cartSessionStorage;
-
+    
     /**
      * @var OrderFactory
      */
@@ -63,5 +63,5 @@ class CartManager
         $this->cartSessionStorage->setCart($cart);
     }
 
- 
+
 }
