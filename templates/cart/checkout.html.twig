@@ -61,7 +61,13 @@
 								Choice your Delivery Address
 							</h4>
 							{{form(orderAddress)}}{% endif %}
-
+							
+	<div class="alert alert-dismissible alert-light  mt-2">
+				<a href="{{path('address_new')}}" class="alert-link">
+					<strong>
+						Add new Delivery address.
+					</strong>
+				</a>
 						</section>
 					{% endif %}
 
@@ -121,7 +127,7 @@
 							</div>
 						</section>
 						<div class="d-grid gap-2 col-8 my-4">
-							<a href={{path('order', {id : cart.id})}} class=" btn btn-info  btn-lg align-items-center">
+							<a href={{path('order', {id : cart.id})}} class=" btn btn-info  btn-lg align-items-center {% if  app.user.addresses is empty   %}disabled {% endif %}">
 								Continue
 							</a>
 						</div>
