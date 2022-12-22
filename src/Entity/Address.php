@@ -4,7 +4,11 @@ namespace App\Entity;
 
 use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 
+#[ApiResource(  
+    
+    normalizationContext: ['groups' => ['user']],)]
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
 {

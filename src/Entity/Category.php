@@ -3,27 +3,35 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
+    #[Groups("product:read")]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
+    
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'parent')]
     private ?self $childs = null;
 
+    #[Groups("product:read")]
     #[ORM\OneToMany(mappedBy: 'childs', targetEntity: self::class)]
     private Collection $parent;
 
+    
     #[ORM\OneToMany(mappedBy: 'categoryId', targetEntity: Product::class)]
     private Collection $products;
 

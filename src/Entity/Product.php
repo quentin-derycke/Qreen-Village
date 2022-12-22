@@ -6,35 +6,51 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
 
-#[ORM\Entity(repositoryClass: ProductRepository::class)]
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['product:read']],)]
+
+    #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+   
+    #[Groups("product:read")]
     private ?int $id = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(nullable: true)]
     private ?int $supplierId = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $description = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2, nullable: true)]
     private ?string $discount = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(nullable: true)]
     private ?int $stock = null;
 
+    #[Groups("product:read")]
     #[ORM\Column(length: 50)]
     private ?string $reference = null;
 
+    #[Groups("product:read")]
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categoryId = null;

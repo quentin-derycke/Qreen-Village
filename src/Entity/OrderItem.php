@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OrderItemRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use ApiPlatform\Metadata\ApiResource;
+
+#[ApiResource]
 #[ORM\Entity(repositoryClass: OrderItemRepository::class)]
 class OrderItem
 {
