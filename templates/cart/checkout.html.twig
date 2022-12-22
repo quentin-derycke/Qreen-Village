@@ -8,6 +8,7 @@
 
 
 <div class="container">
+  {% if cart.items.count > 0 %}
 	<h1 class='mt-4'>
 		Checkout
 	</h1>
@@ -60,7 +61,8 @@
 							<h4 class='mt-4'>
 								Choice your Delivery Address
 							</h4>
-							{{form(orderAddress)}}{% endif %}
+							{{ form_start(orderAddress)}}
+							{{ form_widget(orderAddress.address)}}{% endif %}
 							
 	<div class="alert alert-dismissible alert-light  mt-2">
 				<a href="{{path('address_new')}}" class="alert-link">
@@ -68,6 +70,13 @@
 						Add new Delivery address.
 					</strong>
 				</a>
+</div>
+				<div class="d-grid gap-2 col-8 my-4">
+						{{ form_widget(orderAddress.submit)}}
+						{{ form_end(orderAddress) }}
+					
+						</div>
+
 						</section>
 					{% endif %}
 
@@ -126,13 +135,12 @@
 								</ul>
 							</div>
 						</section>
-						<div class="d-grid gap-2 col-8 my-4">
-							<a href={{path('order', {id : cart.id})}} class=" btn btn-info  btn-lg align-items-center {% if  app.user.addresses is empty   %}disabled {% endif %}">
-								Continue
-							</a>
-						</div>
-
+						 {% else %}
+            <div class="alert alert-info mt-4">
+                Your cart is empty. Go to the <a href="{{ path('home') }}">product list</a>.
+            </div>
+			{% endif %}
 					</div>
-					<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-					<script src='/js/apiCall.js'>
+					
+					<script src='/js/apiCall.js'></script>
 						{% endblock %}

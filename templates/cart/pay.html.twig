@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order Paiement
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1 class='mt-4'>
+			Checkout
+		</h1>
+
+		<div class="row">
+			<section class=" col-md-8 mt-4">
+
+				<h3>Paiement Page</h3>
+
+
+				<form action="" class="row g-3 form-control mt-2">
+					<h4>Paiement methods :
+					</h4>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+						<label class="form-check-label" for="flexCheckDefault">
+							Carte de Credit
+						</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+						<label class="form-check-label" for="flexCheckChecked">
+							Paypal
+						</label>
+					</div>
+
+					<h4>Information de la carte :</h4>
+					<div class="row">
+						<div class="col-md-8">
+							<label for="CardNumber" class="form-label">
+								Card Number</label>
+							<input type="text" id='CardNumber' class="form-control">
+						</div>
+						<div class="col-md-6">
+							<label for="expiration" class="form-label">
+								Expiration date</label>
+							<input type="text" class="form-control" id="expiration">
+						</div>
+						<div class="col-md-4">
+							<label for="CVV" class="form-label">CVV</label>
+							<input type="text" class="form-control" id="CVV">
+						</div>
+					</div>
+
+					<a href="#" class='btn btn-primary'>
+						Payer
+						{{order.total}}</a>
+
+
+				</form>
+
+			</section>
+
+			<!-- Order Resume-->
+			<!-- Order Resume-->
+			<section class=" col-md-4 mt-4 ">
+
+				<div class="card ">
+					<div class="card-header bg-primary text-white d-flex  gap-2 align-items-center ">
+						<h5>
+							Order Resume
+						</h5>
+					</div>
+					<ul class="list-group list-group-flush">
+
+						{% for item in order.items %}
+							<li class="list-group-item d-flex">
+								<div class="flex-fill">
+									<img class=' img img-fluid w-75' src="https://via.placeholder.com/200x150" width="64" alt="Product image">
+								</div>
+								<div class="flex-fill mr-2">
+									<h5 class="mt-0 mb-0">
+										{{ item.product.name }}
+									</h5>
+									<small>
+										{{ item.product.description[:50] }}
+										...
+									</small>
+									<p>
+										{{item.quantity}}
+									</p>
+									<div class="flex-fill mr-2 text-right">
+										<b>
+											{{ item.product.price | format_currency('EUR')}}
+										</b>
+									</div>
+
+
+								</li>
+							{% endfor %}
+
+						</ul>
+
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item d-flex justify-content-between">
+								<div>
+									<b>
+										Total
+									</b>
+								</div>
+								<span>
+									<b>
+										{{ order.total}}
+										€
+									</b>
+								</span>
+							</li>
+						</ul>
+					</div>
+
+				</section>
+
+
+			</div>
+			<script src='/js/apiCall.js'></script>
+		</div>
+	</div>
+{% endblock %}

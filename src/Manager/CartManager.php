@@ -6,6 +6,7 @@ use App\Entity\Order;
 use App\Factory\OrderFactory;
 use App\Storage\CartSessionStorage;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CartManager
 {
@@ -63,5 +64,21 @@ class CartManager
         $this->cartSessionStorage->setCart($cart);
     }
 
+
+    /**
+     * Edits an order with a new status and address.
+     *
+     * @param Order $order Id Object of order  
+     *
+     * @return Order
+     */
+    public function edit( Order $order, UserInterface $user): void
+    {
+        $order->setStatus(Order::STATUS_CHECK);
+        $order->setUpdatedAt(new \DateTime());
+         $order->setUser($user);   
+         $this->entityManager->persist($order);
+         $this->entityManager->flush();
+    }
 
 }

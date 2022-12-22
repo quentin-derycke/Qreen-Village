@@ -44,7 +44,11 @@ class Order
     /**
      *  Checkout Order
      */
-    const STATUS_CHECK = 'delivery';
+    const STATUS_CHECK = 'proccess';
+
+
+    /** Delivery Order */
+    const STATUS_DELIVERY = 'delivery';
 
     public function __construct()
     {

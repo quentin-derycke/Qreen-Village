@@ -20,7 +20,7 @@ class ProductController extends AbstractController
 
         $products = $category->getProducts();
 
-        // dd($category);
+       
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'category' => $category
