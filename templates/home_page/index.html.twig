@@ -1,20 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomePageController!{% endblock %}
-
-{% block body %}
-{% for message in app.flashes('success') %}
-				<div class="alert alert-success mt-4">
-					{{ message }}
-				</div>
-                {% endfor %}
-	<div class="container mt-4">
-		<div class="jumbotron">
-			<h1 class="display-4"> Musique, Les instruments</h1>
-			<p class="lead">On vend des instruments de musique ou quoi ! </p>
-			<hr class="my-4">
-			<a class="btn btn-primary btn-lg" href="{{path('category_index')}}" role="button">Catalogue</a>
-		</div>
-	</div>
+{% block title %}
+	Hello HomePageController!
 {% endblock %}
 
+{% block body %}
+	<link rel="stylesheet" href="/css/titre.css">
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success mt-4">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+
+	<section class="container mt-4">
+
+		<div class="jumbotron">
+			<h1 class="display-4">
+				Musique, Les instruments
+			</h1>
+			<p class="lead">
+				On vend des instruments de musique ou quoi !
+			</p>
+			<hr class="my-4">
+			<a class="btn btn-primary btn-lg" href="{{path('category_index')}}" role="button">
+				Catalogue
+			</a>
+		</div>
+		<div id="carouselExampleControls" class="carousel slide mt-4" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="https://dummyimage.com/780x320/000/fff" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="https://dummyimage.com/780x320/000/fff" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+					<img src="https://dummyimage.com/780x320/000/fff" class="d-block w-100" alt="...">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">
+					Previous
+				</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">
+					Next
+				</span>
+			</button>
+		</div>
+
+
+		<section class='container my-5 '>
+			<h1 class='text-center' id='categories'>
+				Categories
+			</h1>
+			<div class='row row-cols-lg-3 row-cols-2  g-0 mt-5 align-items-center justify-content-center'>
+
+				{% for category in categories %}
+
+					{% if category.childs == null  %}
+						<a style='col-12 col-md-6' href="{{ path('category_subcategories',{'category': category.id })}}">
+							<div class="card rounded-0 border-primary border-top-0 border-end-0  border-bottom border-2" style="max-width: 20rem;">
+								<div class="row g-0 align-items-center justify-content-center">
+									<div class="col-md-4 col-6">
+										<img src="https://dummyimage.com/150x150/000/fff" class='img-fluid' alt="">
+									</div>
+									<div class="col-md-8 col-6">
+										<div class="card-body">
+											<h5 class="card-title text-primary text-decoration-none">
+												{{ category.name }}
+											</h5>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+
+					{% endif %}
+
+				{% endfor %}
+			</div>
+		</section>
+
+	</section>
+
+
+{% endblock %}

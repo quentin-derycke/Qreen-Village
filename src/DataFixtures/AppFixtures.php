@@ -8,6 +8,7 @@ use App\Entity\User;
 use Faker\Generator;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Entity\Image;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -118,6 +119,21 @@ class AppFixtures extends Fixture
             ->setChilds(null);
         $manager->persist($c9);
 
+        // *** IMAGES *** //
+
+        $geimg1 = new Image();
+        $geimg1->setPath('/images/Guitare/Electrique/guitare_elec1_0.png')
+            ->setAlt('guitelec1');
+
+
+        $geimg2 = new Image();
+        $geimg2->setPath('/images/Guitare/Electrique/GuitareElec0_0.png')
+            ->setAlt('guitelec2');
+
+
+        $gaimg1 = new Image();
+        $gaimg1->setPath('/images/Guitare/accoustic/accoustic0_0.png')
+            ->setAlt('guitacc0');
 
 
 
@@ -182,20 +198,20 @@ class AppFixtures extends Fixture
                 ->setEmail($this->faker->email())
                 ->setRoles(['ROLE_USER'])
                 ->setPlainpassword('password');
-                $users[] = $user;
+            $users[] = $user;
             $manager->persist($user);
         }
 
         // *** ADDRESS *** // 
 
-        for($i = 0; $i < 10; $i++){
-             $address = new Address();
-             $address->setHouseNumber($this->faker->buildingNumber())
-                    ->setStreet($this->faker->streetName())
-                    ->setCity($this->faker->city())
-                    ->setZipcode($this->faker->buildingNumber())
-                    ->setUser($users[mt_rand(0, count($users) - 1)]);
-                    $manager->persist($address);
+        for ($i = 0; $i < 10; $i++) {
+            $address = new Address();
+            $address->setHouseNumber($this->faker->buildingNumber())
+                ->setStreet($this->faker->streetName())
+                ->setCity($this->faker->city())
+                ->setZipcode($this->faker->buildingNumber())
+                ->setUser($users[mt_rand(0, count($users) - 1)]);
+            $manager->persist($address);
         }
 
         $manager->flush();

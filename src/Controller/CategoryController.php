@@ -21,6 +21,7 @@ class CategoryController extends AbstractController
 
         return $this->render('category/index.html.twig', [
             'categories' =>  $categories,
+
         ]);
     }
     #[Route('/{category}', name: '_subcategories')]
@@ -28,7 +29,9 @@ class CategoryController extends AbstractController
     {
         return $this->render('category/subcategories.html.twig', [
             'categories' => $category->getParent(),
-            'category' => $category
+            'category' => $category,
+
+
         ]);
     }
 }

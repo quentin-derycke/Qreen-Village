@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\AddToCartType;
 use App\Manager\CartManager;
+use App\Repository\ProductRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,15 +18,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     #[Route('/{category}', name: '_category')]
-    public function index(Category $category): Response
+    public function index(Category $category, PaginatorInterface $paginator, ProductRepository $repository, Request $request): Response
     {
 
         $products = $category->getProducts();
+        $paginatedProducts = $paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1),
+            10
+        );
 
-       
         return $this->render('product/index.html.twig', [
-            'products' => $products,
-            'category' => $category
+            'products' => $paginatedProducts,
+            'category' => $category,
+
         ]);
     }
     #[Route('/details/{id}', name: '_details')]

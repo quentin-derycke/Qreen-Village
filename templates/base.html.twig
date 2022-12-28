@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Welcome!
+			{% block title %}
+				Welcome!
 			{% endblock %}
 		</title>
 		<link
@@ -20,9 +21,12 @@
 	<body>
 		{# {{ include('partials/_navbar.html.twig') }} #}
 		{{ render(controller( 'App\\Controller\\NavController::index')) }}
-		{% block body %}{% endblock %}
-
+		{% block body %}
+		{% endblock %}
+		{% block footer %}
+			{% include "partials/_footer.html.twig" %}
+		{% endblock %}
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-	
+
 	</body>
 </html>

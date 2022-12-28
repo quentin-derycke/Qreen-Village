@@ -10,12 +10,18 @@
 	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 		<ol class="breadcrumb bg-light">
 			<li class="breadcrumb-item">
-				<a href='{{ path('home') }}'>Accueil</a>
+				<a href='{{ path('home') }}'>
+					Accueil
+				</a>
 			</li>
 			<li class="breadcrumb-item">
-				<a href="{{path('category_index')}}">Categories</a>
+				<a href="{{path('category_index')}}">
+					Categories
+				</a>
 			</li>
-			<li class="breadcrumb-item" aria-current='page'>{{category.name}}</li>
+			<li class="breadcrumb-item" aria-current='page'>
+				{{category.name}}
+			</li>
 		</ol>
 	</nav>
 
@@ -27,11 +33,16 @@
 
 
 				<div class="card  bg-light  mb-3 me-4" style="max-width: 20rem;">
+					<a href='{{path('product_category', {category : category.id})}}'>
+						<div class="card-body">
+							<img src="https://dummyimage.com/250x150/000/fff" class="card-img-top" alt="{{ category.name }}">
 
-					<div class="card-body">
-						<a href='{{path('product_category', {category : category.id})}}'>
-							<h4 class="card-title">{{ category.name }}</h4>
-							<p class="card-text"></p>
+
+							<h5 class="card-title text-black mt-2">
+								{{ category.name }}
+							</h5>
+
+
 						</div>
 					</a>
 				</div>

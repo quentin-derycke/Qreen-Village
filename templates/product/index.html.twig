@@ -9,43 +9,80 @@
 	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 		<ol class="breadcrumb bg-light">
 			<li class="breadcrumb-item">
-				<a href='{{ path('home') }}'>Accueil</a>
+				<a href='{{ path('home') }}'>
+					Accueil
+				</a>
 			</li>
 			<li class="breadcrumb-item">
-				<a href="{{path('category_index')}}">Categories</a>
+				<a href="{{path('category_index')}}">
+					Categories
+				</a>
 			</li>
 			<li class="breadcrumb-item">
-				<a href="{{path('category_subcategories',{category : category.childs.id})}}">{{category.childs.name}}</a>
+				<a href="{{path('category_subcategories',{category : category.childs.id})}}">
+					{{category.childs.name}}
+				</a>
 			</li>
-			<li class="breadcrumb-item" aria-current='page'>{{category.name}}</li>
+			<li class="breadcrumb-item" aria-current='page'>
+				{{category.name}}
+			</li>
 		</ol>
 	</nav>
 
 	<!-- Products List -->
-  <div class="container px-4 px-lg-5 mt-5">
-    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-			{% for product in products %}          
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{product.name}}</h5>
-                                    <!-- Product price-->
-                                    {{product.price}}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="{{path('product_details', { 'id' : product.id })}}">details</a></div>
-                            </div>
-                        </div>
-                    </div>
-                   
+	<div class="container px-4 px-lg-5 mt-5">
+		<div class="row row-cols-1 justify-content-center">
+			{% for product in products %}
 
-		{% endfor %}
+
+				<div class="card bg-light col-12 mt-4">
+					<a class='text-decoration-none' href="{{path('product_details', { 'id' : product.id })}}">
+
+						<div
+							class="row g-0 ">
+							<!-- Product image-->
+							<div class="col-md-4">
+								<img class="img-fluid" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
+							</div>
+							<!-- Product details-->
+
+							<div class="card-body p-4 col-md-8">
+								<div class="col row">
+
+									<div
+										class="text-center col-md-2">
+										<!-- Product name-->
+										<h5 class="fw-bolder text-primary">
+											{{product.name}}
+										</h5>
+									</div>
+									<div class='col-md-4'>
+										<p class='text-primary'>
+											{{product.description}}
+										</p>
+									</div>
+									<!-- Product price-->
+									<div class='col-md-2'>
+										<p class='text-primary'>
+											{{product.price}}
+											€
+										</p>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+					</a>
+
+				</div>
+
+
+			{% endfor %}
+		</div>
 	</div>
-</div>{% endblock %}
+	<div class="navigation d-flex justify-content-center mt-2 ">
+		{{ knp_pagination_render(products) }}
+	</div>
+{% endblock %}
