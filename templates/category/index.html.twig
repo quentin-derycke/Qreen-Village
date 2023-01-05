@@ -41,10 +41,11 @@
 
 				{% if category.childs == null  %}
 					<a style='col-12 col-md-6' href="{{ path('category_subcategories',{'category': category.id })}}">
-						<div class="card rounded-0 border-primary border-top-0 border-end-0  border-bottom border-2" style="max-width: 20rem;">
+						<div class="card rounded-0 border-primary border-top-0 border-end-0  border-bottom border-1" style="max-width: 20rem;">
 							<div class="row g-0 align-items-center justify-content-center">
 								<div class="col-md-4 col-6">
-									<img src="https://dummyimage.com/150x150/000/fff" class='img-fluid' alt="">
+
+									<img src="{{category.image.path}}" class='img-fluid' alt="">
 								</div>
 								<div class="col-md-8 col-6 ">
 									<div class="card-body">

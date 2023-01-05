@@ -21,6 +21,8 @@ class Image
     #[ORM\Column(length: 50)]
     private ?string $alt = null;
 
+
+
     public function getId(): ?int
     {
         return $this->id;

@@ -28,6 +28,8 @@ class ProductController extends AbstractController
             10
         );
 
+
+
         return $this->render('product/index.html.twig', [
             'products' => $paginatedProducts,
             'category' => $category,
