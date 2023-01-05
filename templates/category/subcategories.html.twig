@@ -6,16 +6,20 @@
 
 {% block body %}
 
-	<!--- Breadcrumbs-->
-	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-		<ol class="breadcrumb bg-light">
+	
+
+<!--- Jumbotron-->
+<div class=" p-5 mb-4 bg-primary text-light" >
+  <!--- Breadcrumbs-->
+	<nav style=" --bs-breadcrumb-divider: '>';"   aria-label="breadcrumb">
+		<ol class="breadcrumb bg-primary">
 			<li class="breadcrumb-item">
-				<a href='{{ path('home') }}'>
+				<a class='text-decoration-none text-light' href='{{ path('home') }}'>
 					Accueil
 				</a>
 			</li>
-			<li class="breadcrumb-item">
-				<a href="{{path('category_index')}}">
+			<li class="breadcrumb-item  ">
+				<a class='text-decoration-none text-light' href="{{path('category_index')}}">
 					Categories
 				</a>
 			</li>
@@ -24,6 +28,13 @@
 			</li>
 		</ol>
 	</nav>
+      <div class="container-fluid py-5">
+	
+        <h1 class="display-5 fw-bold">{{category.name}}</h1>
+        <p class="col-md-8 fs-4">{{category.description}}</p>
+      
+      </div>
+    </div>
 
 
 	<!--- Cards -->
@@ -49,6 +60,7 @@
 
 
 			{% endfor %}
+			
 		</div>
 	</div>
 {% endblock %}

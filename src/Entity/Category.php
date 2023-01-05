@@ -38,6 +38,9 @@ class Category
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Image $Image = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
+
 
     public function __construct()
     {
@@ -142,6 +145,18 @@ class Category
     public function setImage(?Image $Image): self
     {
         $this->Image = $Image;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

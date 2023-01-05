@@ -105,7 +105,8 @@ class AppFixtures extends Fixture
         $c1 = new Category();
         $c1->setName("Guitares")
             ->setChilds(null)
-            ->setImage($imgGc);
+            ->setImage($imgGc)
+            ->setDescription("Découvrez notre sélection de guitares de qualité à prix imbattables. Du débutant au pro, il y en a pour tous les niveaux et styles. Commandez votre guitare dès maintenant !");
         $manager->persist($c1);
 
         $c11 = new Category();
