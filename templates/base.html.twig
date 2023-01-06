@@ -20,6 +20,7 @@
 	</head>
 	<body>
 		{# {{ include('partials/_navbar.html.twig') }} #}
+		
 		{{ render(controller( 'App\\Controller\\NavController::index')) }}
 		{% block body %}
 		{% endblock %}

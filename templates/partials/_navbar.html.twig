@@ -99,11 +99,11 @@
 					<a href="{{path('user_profil', {id : app.user.id })}}" class="nav-link text-primary">
 						{{app.user.name}}
 					</a>
-					<a href="{{path('user_orders', {id : app.user.id })}}" class="nav-link">
+					<a href="{{path('user_orders', {id : app.user.id })}}" class="nav-link text-primary">
 						Mes Commandes
 					</a>
 					<div class="dropdown-divider"></div>
-					<a class="nav-link" href="{{path('security_logout', {id : app.user.id })}}">
+					<a class="nav-link text-primary" href="{{path('security_logout', {id : app.user.id })}}">
 						Deconnexion
 					</a>
 

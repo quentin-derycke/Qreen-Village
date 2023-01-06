@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Address;
 use App\Entity\User;
 use App\Form\RegistrationType;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address as E_address;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,16 +31,33 @@ class SecurityController extends AbstractController
         //Nothing to do here
     }
     #[Route('/registration', name: 'security_registration', methods: ['GET', 'POST'])]
-    public function registration(EntityManagerInterface $manager, Request $request): Response
+    public function registration(EntityManagerInterface $manager, Request $request, MailerInterface $mailer): Response
     {
         $user = new User();
-
         $user->setRoles(['ROLE_USER']);
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
+               
+     
+
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
+
+
+            $email = (new TemplatedEmail())
+            ->from(new E_address('info_noreply@Village.com', 'Green MailBot'))
+            ->to($user->getEmail())
+            ->cc('Shipping@gvillage.com')
+            ->subject('Votre commande est validée!')
+            ->htmlTemplate('mail/email_verif.html.twig')
+            ->context([
+                'user' => $user,
+            ]);
+
+
+    $mailer->send($email);
+    
 
             $this->addFlash(
                 'succes',

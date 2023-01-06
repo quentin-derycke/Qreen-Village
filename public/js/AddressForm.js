@@ -7,7 +7,7 @@ const street = document.getElementById('address_street');
 const zipcode = document.getElementById('address_zipcode');
 
 const houseRegex = /^\d+[a-zA-Z]?$/
-const streetRegex =  /^[0-9]{1,4}[ ](?:[A-Za-zéèàùîôöüÿâäëï]+|[0-9]{1,4}[A-Za-z]?)[ ](?:[A-Za-zéèàùîôöüÿâäëï]+|[0-9]{1,4}[A-Za-z]?)$/
+const streetRegex =  /^[ ](?:[A-Za-zéèàùîôöüÿâäëï]+|[0-9]{1,4}[A-Za-z]?)[ ](?:[A-Za-zéèàùîôöüÿâäëï]+|[0-9]{1,4}[A-Za-z]?)$/
 const zipcodeRegex = /^[0-9]{5}$/
 
 const houseError = document.getElementById('houseError');
