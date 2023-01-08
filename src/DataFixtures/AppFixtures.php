@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
 
         $imgBac = new Image();
         $imgBac->setPath('/images/Categories/Bass/BassAcc.png')
-            ->setAlt('Guitares Accoustic');
+            ->setAlt('Guitares Basses Accoustic');
         $manager->persist($imgBac);
 
         $imgBec = new Image();
@@ -206,17 +206,17 @@ class AppFixtures extends Fixture
         // *** IMAGES *** //
 
         $geimg1 = new Image();
-        $geimg1->setPath('/images/Guitare/Electrique/guitare_elec1_0.png')
+        $geimg1->setPath('/images/Products/Guitare/Electrique/guitare_elec1_1.jpg')
             ->setAlt('guitelec1');
         $manager->persist($geimg1);
 
         $geimg2 = new Image();
-        $geimg2->setPath('/images/Guitare/Electrique/GuitareElec0_0.png')
+        $geimg2->setPath('/images/Products/Guitare/Electrique/GuitareElec0_0.jpg')
             ->setAlt('guitelec2');
         $manager->persist($geimg2);
 
         $gaimg1 = new Image();
-        $gaimg1->setPath('/images/Guitare/accoustic/accoustic0_0.png')
+        $gaimg1->setPath('/images/Products/Guitare/accoustic/accoustic0_0.jpg')
             ->setAlt('guitacc0');
         $manager->persist($gaimg1);
 
@@ -230,6 +230,8 @@ class AppFixtures extends Fixture
             ->setDescription(mt_rand(0, 10) . ' chance(s) sur 10 de devenir sourd')
             ->setReference(uniqid('G-V__'))
             ->setDiscount('0')
+            ->addImage($geimg1)
+            ->addImage($geimg2)
             ->setStock(mt_rand(1, 100));
 
         $manager->persist($productGe);

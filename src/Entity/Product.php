@@ -58,10 +58,14 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categoryId = null;
 
+    #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'products')]
+    private Collection $image;
+
 
 
     public function __construct()
     {
+        $this->image = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,6 +166,30 @@ class Product
     public function setCategoryId(?Category $categoryId): self
     {
         $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImage(): Collection
+    {
+        return $this->image;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->image->contains($image)) {
+            $this->image->add($image);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        $this->image->removeElement($image);
 
         return $this;
     }

@@ -43,7 +43,11 @@
 							<!-- Product image-->
 							<div class="col-md-4">
 
-								<img class="img-fluid" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
+							{% if product.image is not empty %}
+    <img class="img-fluid" src="{{ product.image[0].path }}" style="" alt="Product image">
+{% else %}
+    <img class="img-fluid" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="Dummy image">
+{% endif %}
 							</div>
 							<!-- Product details-->
 
