@@ -9,7 +9,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['product:read']],
+)]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {

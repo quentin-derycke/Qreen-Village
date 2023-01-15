@@ -179,29 +179,78 @@ class AppFixtures extends Fixture
             ->setImage($imgWc);
         $manager->persist($c5);
 
+$c51 = new Category();
+$c51->setName('Cuivres')
+->setChilds($c5);
+$manager->persist($c51);
+
+$c52 = new Category();
+$c52->setName('Bois')
+->setChilds($c5);
+$manager->persist($c52);
+
+$c53 = new Category();
+$c53->setName('Ocarina')
+->setChilds($c5);
+$manager->persist($c53);
+
+
         $c6 = new Category();
         $c6->setName("Instruments traditionnels")
             ->setChilds(null)
             ->setImage($imgTc);
         $manager->persist($c6);
 
+        $c61 = new Category();
+        $c61->setName("Accordeons")
+            ->setChilds($c6);
+        $manager->persist($c61);
+
+        $c62 = new Category();
+        $c62->setName("Instrumpents de Folklore")
+            ->setChilds($c6);
+        $manager->persist($c62);
+
         $c7 = new Category();
         $c7->setName("Matériel DJ")
             ->setChilds(null)
             ->setImage($imgDc);
         $manager->persist($c7);
+     
+        $c71 = new Category();
+        $c71->setName("Logiciel")
+            ->setChilds($c7);
+        $manager->persist($c71);
 
         $c8 = new Category();
         $c8->setName("Microphones")
             ->setChilds(null)
             ->setImage($imgMc);
         $manager->persist($c8);
+       
+       
+        $c81 = new Category();
+        $c81->setName("Chants")
+            ->setChilds($c8);
+        $manager->persist($c81);
+
+
+        $c82 = new Category();
+        $c82->setName("Podcast")
+            ->setChilds($c8);
+        $manager->persist($c82);
 
         $c9 = new Category();
         $c9->setName("Home Studio")
             ->setChilds(null)
             ->setImage($imgSc);
         $manager->persist($c9);
+
+
+        $c91 = new Category();
+        $c91->setName("Interface Audio")
+            ->setChilds($c9);
+        $manager->persist($c91);
 
         // *** IMAGES *** //
 
