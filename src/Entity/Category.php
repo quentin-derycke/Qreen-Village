@@ -10,26 +10,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
-    normalizationContext: ['groups' => ['product:read']],
 )]
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
-    #[Groups("product:read")]
+    #[Groups("product:read",'category')]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups("product:read")]
+    #[Groups("product:read", 'category')]
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    
+    #[Groups("category:read")]
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'parent')]
     private ?self $childs = null;
 
-    #[Groups("product:read")]
+    #[Groups("product:read", 'category')]
     #[ORM\OneToMany(mappedBy: 'childs', targetEntity: self::class)]
     private Collection $parent;
 
@@ -37,9 +36,11 @@ class Category
     #[ORM\OneToMany(mappedBy: 'categoryId', targetEntity: Product::class)]
     private Collection $products;
 
+    #[Groups("category")]
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Image $Image = null;
 
+    #[Groups("category")]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 

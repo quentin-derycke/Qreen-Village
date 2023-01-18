@@ -58,6 +58,7 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categoryId = null;
 
+    #[Groups("product:read")]
     #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'products')]
     private Collection $image;
 

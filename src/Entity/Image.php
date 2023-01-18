@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
 use ApiPlatform\Metadata\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-
+#[ApiResource(
+    normalizationContext: ['groups' => ['product:read']],
+)]
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
 {
@@ -17,9 +20,11 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups("product:read", 'category')]
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
+    #[Groups("product:read", 'category')]
     #[ORM\Column(length: 50)]
     private ?string $alt = null;
 
