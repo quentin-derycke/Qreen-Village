@@ -10,10 +10,13 @@ use App\Repository\ProductRepository;
 
 use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ApiResource(
     normalizationContext: ['groups' => ['product:read']],
 )]
+#[ApiFilter(SearchFilter::class, properties: [  'name' => 'partial', 'category' => 'exact'])]
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product

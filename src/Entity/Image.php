@@ -9,9 +9,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource(
-    normalizationContext: ['groups' => ['product:read']],
-)]
+#[ApiResource( normalizationContext: ['groups' => ['product:read', 'category'],
+], paginationItemsPerPage: 15) ]
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
 {
@@ -20,11 +19,11 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups("product:read", 'category')]
+    #[Groups(["product:read", 'category'])]
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
-    #[Groups("product:read", 'category')]
+    #[Groups(["product:read", 'category'])]
     #[ORM\Column(length: 50)]
     private ?string $alt = null;
 
