@@ -40,10 +40,7 @@ class AddressType extends AbstractType
                 'label_attr' => ['class' => 'form-label mt-4'],
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Regex([
-                        'pattern' => '/^(rue|avenue|boulevard|impasse|place|quai) \b[A-Z][a-z]*/',
-                        'message' => 'Indiquer un nom de rue en France',
-                    ])
+                  
                 ]
             ])
 

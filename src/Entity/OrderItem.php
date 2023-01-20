@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\OrderItemRepository;
+
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use ApiPlatform\Metadata\ApiResource;
-
-#[ApiResource]
+#[ApiResource(normalizationContext: [ "groups" => ["order:read"]])]
 #[ORM\Entity(repositoryClass: OrderItemRepository::class)]
 class OrderItem
 {
@@ -18,6 +19,8 @@ class OrderItem
     private ?int $id = null;
 
     #[ORM\ManyToOne]
+    
+    #[Groups(["product:read", "order:read"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product = null;
 

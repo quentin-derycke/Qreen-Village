@@ -18,29 +18,28 @@ class Address
     private ?int $id = null;
 
 
-    
     #[ORM\Column(length: 10)]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read"])]
     private ?string $houseNumber = null;
 
    
     #[ORM\Column(length: 50)]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read"])]
     private ?string $street = null;
 
   
     #[ORM\Column(length: 50)]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read"])]
     private ?string $city = null;
 
     
     #[ORM\Column(length: 50)]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read"])]
     private ?string $zipcode = null;
 
     
     #[ORM\ManyToOne(inversedBy: 'addresses')]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read"])]
     private ?User $user = null;
 
     public function getId(): ?int

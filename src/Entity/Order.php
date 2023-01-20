@@ -5,33 +5,43 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OrderRepository;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
+#[ApiResource(normalizationContext: [ "groups" => ["order:read"]])]
 #[ORM\Table(name: '`order`')]
 class Order
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["order:read"])]
     private ?int $id = null;
 
+    #[Groups(["order:read"])]
     #[ORM\OneToMany(mappedBy: 'orderRef', targetEntity: OrderItem::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $items;
 
+    #[Groups(["order:read"])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[Groups(["order:read"])]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[Groups(["order:read"])]
     #[ORM\Column(length: 255)]
     private ?string $status = self::STATUS_CART;
 
+    #[Groups(["order:read"])]
     #[ORM\ManyToOne]
     private ?Address $address = null;
 
+    #[Groups(["order:read", "user:read"])]
     #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?User $user = null;
 
