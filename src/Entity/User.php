@@ -3,17 +3,17 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use ApiPlatform\Metadata\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ApiResource(
@@ -27,18 +27,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email()]
     #[Assert\Length(min: 2, max: 180)]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private ?string $email = null;
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private array $roles = [];
 
     /**
@@ -49,43 +49,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     #[Assert\NotBlank()]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private ?string $password = 'password';
 
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\Length(min: 2, max: 50)]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read",])]
     private ?string $name = null;
 
     #[ORM\Column(length: 100, nullable: true)]
     #[Assert\Length(min: 2, max: 50)]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read",])]
     private ?string $lastname = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private ?\DateTimeInterface $birthdate = null;
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private ?\DateTimeImmutable $updatedAt = null;
     
     #[ORM\Column(length: 30, nullable: true)]
     #[Assert\Length(min: 6, max: 30)]
-    #[Groups("user:read")]
+    #[Groups(["user:read", "order:read",])]
     private ?string $phoneNumber = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private ?\DateTimeImmutable $updateAt = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class)]
-    #[Groups("user:read")]
+    #[Groups(["user:read"])]
     private Collection $addresses;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]

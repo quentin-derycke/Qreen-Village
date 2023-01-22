@@ -2,13 +2,14 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Address;
 use Faker\Factory;
 use App\Entity\User;
 use Faker\Generator;
+use App\Entity\Image;
+use App\Entity\Address;
 use App\Entity\Product;
 use App\Entity\Category;
-use App\Entity\Image;
+use App\Entity\Suppliers;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -263,11 +264,56 @@ $manager->persist($c53);
         $geimg2->setPath('/images/Products/Guitare/Electrique/GuitareElec0_0.jpg')
             ->setAlt('guitelec2');
         $manager->persist($geimg2);
+        
+        
+        $ge1img1 = new Image();
+        $ge1img1->setPath('/images/Products/Guitare/Electrique/guitarElec0_1.jpg')
+            ->setAlt('guitelec3');
+        $manager->persist($ge1img1);
+        
+        $ge1img2 = new Image();
+        $ge1img2->setPath('/images/Products/Guitare/Electrique/GuitareElec0_2.jpg')
+            ->setAlt('guitelec4');
+        $manager->persist($ge1img2);
 
+        
         $gaimg1 = new Image();
         $gaimg1->setPath('/images/Products/Guitare/accoustic/accoustic0_0.jpg')
             ->setAlt('guitacc0');
         $manager->persist($gaimg1);
+
+        $gaimg2 = new Image();
+        $gaimg2->setPath('/images/Products/Guitare/accoustic/accoustic0_1.jpg')
+            ->setAlt('guitacc1');
+        $manager->persist($gaimg2);
+
+        $bimg1 = new Image();
+        $bimg1->setPath('/images/Products/Basse/accoustic/baccoustic0_0.jpg')
+        ->setAlt('baccoustic0');
+        $manager->persist($bimg1);
+        
+        $bimg2 = new Image();
+        $bimg2->setPath('/images/Products/Basse/electric/belectric0_0.jpg')
+        ->setAlt('belectric0');
+        $manager->persist($bimg2);
+
+// ** SUPPLIERS ** //
+
+$s1 = new Suppliers();
+$s1->setName('Fender');
+$manager->persist($s1);
+
+$s2 = new Suppliers();
+$s2->setName('Gibson');
+$manager->persist($s2);
+
+$s3 = new Suppliers();
+$s3->setName('Cort');
+$manager->persist($s3);
+
+$s4 = new Suppliers();
+$s4->setName('Epiphone');
+$manager->persist($s4);
 
 
         // *** PRODUCTS *** //
@@ -281,11 +327,12 @@ $manager->persist($c53);
             ->setDiscount('0')
             ->addImage($geimg1)
             ->addImage($geimg2)
+            ->setSupplier($s1)
             ->setStock(mt_rand(1, 100));
 
         $manager->persist($productGe);
 
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $product = new Product();
             $product->setName('Elec ' . $i)
                 ->setCategoryId($c11)
@@ -293,6 +340,9 @@ $manager->persist($c53);
                 ->setDescription(mt_rand(0, 10) . ' chance(s) sur 10 de devenir sourd')
                 ->setReference(uniqid('G-V__'))
                 ->setDiscount('0')
+                ->addImage($ge1img1)
+            ->addImage($ge1img2)
+            ->setSupplier($s2)
                 ->setStock(mt_rand(1, 100));
             $manager->persist($product);
         }
@@ -305,6 +355,8 @@ $manager->persist($c53);
                 ->setDescription(mt_rand(0, 10) . ' chance(s) sur 10 de devenir sourd')
                 ->setReference(uniqid('G-V__'))
                 ->setDiscount('0')
+                ->addImage($gaimg1)
+                ->setSupplier($s3)
                 ->setStock(mt_rand(1, 100));
             $manager->persist($product);
         }
@@ -317,6 +369,8 @@ $manager->persist($c53);
                 ->setDescription(mt_rand(0, 10) . ' chance(s) sur 10 de devenir sourd')
                 ->setReference(uniqid('G-V__'))
                 ->setDiscount('0')
+                ->addImage($bimg1)
+                ->setSupplier($s1)
                 ->setStock(mt_rand(1, 100));
             $manager->persist($product);
         }
@@ -329,9 +383,12 @@ $manager->persist($c53);
                 ->setDescription(mt_rand(0, 10) . ' chance(s) sur 10 de devenir sourd')
                 ->setReference(uniqid('G-V__'))
                 ->setDiscount('0')
+                ->addImage($bimg1)
+                ->setSupplier($s4)
                 ->setStock(mt_rand(1, 100));
             $manager->persist($product);
         }
+
 
         // ***  USERS  *** //
         $users = [];

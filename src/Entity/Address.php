@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use App\Repository\AddressRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: [ "groups" => ["address:read"]]
+)]
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
 {
@@ -15,31 +17,32 @@ class Address
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["address:read"])]
     private ?int $id = null;
 
 
     #[ORM\Column(length: 10)]
-    #[Groups(["user:read", "order:read"])]
+    #[Groups(["user:read", "order:read","address:read","address:read"])]
     private ?string $houseNumber = null;
 
    
     #[ORM\Column(length: 50)]
-    #[Groups(["user:read", "order:read"])]
+    #[Groups(["user:read", "order:read","address:read"])]
     private ?string $street = null;
 
   
     #[ORM\Column(length: 50)]
-    #[Groups(["user:read", "order:read"])]
+    #[Groups(["user:read", "order:read","address:read"])]
     private ?string $city = null;
 
     
     #[ORM\Column(length: 50)]
-    #[Groups(["user:read", "order:read"])]
+    #[Groups(["user:read", "order:read","address:read"])]
     private ?string $zipcode = null;
 
     
     #[ORM\ManyToOne(inversedBy: 'addresses')]
-    #[Groups(["user:read", "order:read"])]
+    #[Groups(["user:read", "order:read","address:read"])]
     private ?User $user = null;
 
     public function getId(): ?int

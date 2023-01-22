@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ProductRepository;
 
-use ApiPlatform\Metadata\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Metadata\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ApiResource(
     normalizationContext: ['groups' => ['product:read']],
@@ -25,45 +25,49 @@ class Product
     #[ORM\GeneratedValue]
     #[ORM\Column]
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     private ?int $id = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\Column(nullable: true)]
     private ?int $supplierId = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $description = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2, nullable: true)]
     private ?string $discount = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\Column(nullable: true)]
     private ?int $stock = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\Column(length: 50)]
     private ?string $reference = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categoryId = null;
 
-    #[Groups("product:read")]
+    #[Groups(["product:read"])]
     #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'products')]
     private Collection $image;
+
+    #[Groups(["product:read", 'suppliers:read'])]
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Suppliers $supplier = null;
 
 
 
@@ -194,6 +198,18 @@ class Product
     public function removeImage(Image $image): self
     {
         $this->image->removeElement($image);
+
+        return $this;
+    }
+
+    public function getSupplier(): ?Suppliers
+    {
+        return $this->supplier;
+    }
+
+    public function setSupplier(?Suppliers $supplier): self
+    {
+        $this->supplier = $supplier;
 
         return $this;
     }
