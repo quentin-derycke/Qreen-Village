@@ -40,7 +40,7 @@ class Product
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $description = null;
 
-    #[Groups(["product:read"])]
+    #[Groups(["product:read", "order:read"])]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
@@ -56,7 +56,7 @@ class Product
     #[ORM\Column(length: 50)]
     private ?string $reference = null;
 
-    #[Groups(["product:read"])]
+    #[Groups(["product:read", "order:read"])]
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categoryId = null;
@@ -65,7 +65,7 @@ class Product
     #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'products')]
     private Collection $image;
 
-    #[Groups(["product:read", 'suppliers:read'])]
+    #[Groups(["product:read", 'suppliers:read', "order:read"])]
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Suppliers $supplier = null;
 

@@ -26,6 +26,8 @@ class OrderItem
 
     #[ORM\Column]
     #[Assert\NotBlank()]
+    #[Groups(["order:read"])]
+
     #[Assert\GreaterThanOrEqual(1)]
     private ?int $quantity = null;
 
