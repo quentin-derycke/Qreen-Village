@@ -32,9 +32,7 @@ class Product
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[Groups(["product:read"])]
-    #[ORM\Column(nullable: true)]
-    private ?int $supplierId = null;
+
 
     #[Groups(["product:read"])]
     #[ORM\Column(length: 150, nullable: true)]
@@ -66,14 +64,19 @@ class Product
     private Collection $image;
 
     #[Groups(["product:read", 'suppliers:read', "order:read"])]
-    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\ManyToOne( targetEntity: Suppliers::class, inversedBy: 'products')]
+    #[ORM\JoinColumn(name:"supplierId", referencedColumnName:"id")]
     private ?Suppliers $supplier = null;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItem::class)]
+    private Collection $items;
 
 
 
     public function __construct()
     {
         $this->image = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,17 +96,6 @@ class Product
         return $this;
     }
 
-    public function getSupplierId(): ?int
-    {
-        return $this->supplierId;
-    }
-
-    public function setSupplierId(?int $supplierId): self
-    {
-        $this->supplierId = $supplierId;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -210,6 +202,36 @@ class Product
     public function setSupplier(?Suppliers $supplier): self
     {
         $this->supplier = $supplier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderItem>
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
+    public function addItem(OrderItem $item): self
+    {
+        if (!$this->items->contains($item)) {
+            $this->items->add($item);
+            $item->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeItem(OrderItem $item): self
+    {
+        if ($this->items->removeElement($item)) {
+            // set the owning side to null (unless already changed)
+            if ($item->getProduct() === $this) {
+                $item->setProduct(null);
+            }
+        }
 
         return $this;
     }

@@ -39,6 +39,23 @@ class SuppliersRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBySupplier($supplier)
+    {
+
+        return $this->createQueryBuilder('s')
+            ->select("s.name, SUM(p.price * oi.quantity) as total")
+            ->join('s.products', 'p')
+            ->join('p.items', 'oi')
+            ->join('oi.orderRef', 'o')
+            ->andWhere('s.name LIKE :name')
+            ->andWhere('o.status LIKE :status')
+            ->setParameter('name', $supplier)
+            ->setParameter('status', 'proccess')
+            ->groupBy('s.name')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Suppliers[] Returns an array of Suppliers objects
 //     */

@@ -24,8 +24,12 @@ class OrderService {
 
       return $this->order->findByYear($year);
 
-
   }
+  function getSalesBySupplier($supplier) {
+
+    return $this->order->findBySupplier($supplier);
+
+}
 
 
 

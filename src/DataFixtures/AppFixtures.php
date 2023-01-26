@@ -180,20 +180,20 @@ class AppFixtures extends Fixture
             ->setImage($imgWc);
         $manager->persist($c5);
 
-$c51 = new Category();
-$c51->setName('Cuivres')
-->setChilds($c5);
-$manager->persist($c51);
+        $c51 = new Category();
+        $c51->setName('Cuivres')
+            ->setChilds($c5);
+        $manager->persist($c51);
 
-$c52 = new Category();
-$c52->setName('Bois')
-->setChilds($c5);
-$manager->persist($c52);
+        $c52 = new Category();
+        $c52->setName('Bois')
+            ->setChilds($c5);
+        $manager->persist($c52);
 
-$c53 = new Category();
-$c53->setName('Ocarina')
-->setChilds($c5);
-$manager->persist($c53);
+        $c53 = new Category();
+        $c53->setName('Ocarina')
+            ->setChilds($c5);
+        $manager->persist($c53);
 
 
         $c6 = new Category();
@@ -217,7 +217,7 @@ $manager->persist($c53);
             ->setChilds(null)
             ->setImage($imgDc);
         $manager->persist($c7);
-     
+
         $c71 = new Category();
         $c71->setName("Logiciel")
             ->setChilds($c7);
@@ -228,8 +228,8 @@ $manager->persist($c53);
             ->setChilds(null)
             ->setImage($imgMc);
         $manager->persist($c8);
-       
-       
+
+
         $c81 = new Category();
         $c81->setName("Chants")
             ->setChilds($c8);
@@ -264,19 +264,19 @@ $manager->persist($c53);
         $geimg2->setPath('/images/Products/Guitare/Electrique/GuitareElec0_0.jpg')
             ->setAlt('guitelec2');
         $manager->persist($geimg2);
-        
-        
+
+
         $ge1img1 = new Image();
         $ge1img1->setPath('/images/Products/Guitare/Electrique/guitarElec0_1.jpg')
             ->setAlt('guitelec3');
         $manager->persist($ge1img1);
-        
+
         $ge1img2 = new Image();
         $ge1img2->setPath('/images/Products/Guitare/Electrique/GuitareElec0_2.jpg')
             ->setAlt('guitelec4');
         $manager->persist($ge1img2);
 
-        
+
         $gaimg1 = new Image();
         $gaimg1->setPath('/images/Products/Guitare/accoustic/accoustic0_0.jpg')
             ->setAlt('guitacc0');
@@ -289,31 +289,31 @@ $manager->persist($c53);
 
         $bimg1 = new Image();
         $bimg1->setPath('/images/Products/Basse/accoustic/baccoustic0_0.jpg')
-        ->setAlt('baccoustic0');
+            ->setAlt('baccoustic0');
         $manager->persist($bimg1);
-        
+
         $bimg2 = new Image();
         $bimg2->setPath('/images/Products/Basse/electric/belectric0_0.jpg')
-        ->setAlt('belectric0');
+            ->setAlt('belectric0');
         $manager->persist($bimg2);
 
-// ** SUPPLIERS ** //
+        // ** SUPPLIERS ** //
 
-$s1 = new Suppliers();
-$s1->setName('Fender');
-$manager->persist($s1);
+        $s1 = new Suppliers();
+        $s1->setName('Fender');
+        $manager->persist($s1);
 
-$s2 = new Suppliers();
-$s2->setName('Gibson');
-$manager->persist($s2);
+        $s2 = new Suppliers();
+        $s2->setName('Gibson');
+        $manager->persist($s2);
 
-$s3 = new Suppliers();
-$s3->setName('Cort');
-$manager->persist($s3);
+        $s3 = new Suppliers();
+        $s3->setName('Cort');
+        $manager->persist($s3);
 
-$s4 = new Suppliers();
-$s4->setName('Epiphone');
-$manager->persist($s4);
+        $s4 = new Suppliers();
+        $s4->setName('Epiphone');
+        $manager->persist($s4);
 
 
         // *** PRODUCTS *** //
@@ -341,8 +341,8 @@ $manager->persist($s4);
                 ->setReference(uniqid('G-V__'))
                 ->setDiscount('0')
                 ->addImage($ge1img1)
-            ->addImage($ge1img2)
-            ->setSupplier($s2)
+                ->addImage($ge1img2)
+                ->setSupplier($s2)
                 ->setStock(mt_rand(1, 100));
             $manager->persist($product);
         }

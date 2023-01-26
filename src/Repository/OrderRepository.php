@@ -53,20 +53,23 @@ class OrderRepository extends ServiceEntityRepository
 
 
 
-public function findByYear($year) {
+    public function findByYear($year)
+    {
 
-    return $this->createQueryBuilder('o')
-    ->select("MONTH(o.updatedAt) as month, SUM(p.price * oi.quantity) as total")
-    ->join('o.items', 'oi')
-    ->join('oi.product', 'p')
-    ->andWhere('YEAR(o.updatedAt) = :year')
-    ->andWhere('o.status LIKE :status')
-    ->setParameter('year', $year)
-    ->setParameter('status', 'proccess')
-    ->groupBy('month')
-    ->getQuery()
-    ->getResult();
-}
+        return $this->createQueryBuilder('o')
+            ->select("MONTH(o.updatedAt) as month, SUM(p.price * oi.quantity) as total")
+            ->join('o.items', 'oi')
+            ->join('oi.product', 'p')
+            ->andWhere('YEAR(o.updatedAt) = :year')
+            ->andWhere('o.status LIKE :status')
+            ->setParameter('year', $year)
+            ->setParameter('status', 'proccess')
+            ->groupBy('month')
+            ->getQuery()
+            ->getResult();
+    }
+
+  
     //    /**
     //     * @return Order[] Returns an array of Order objects
     //     */

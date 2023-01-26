@@ -27,6 +27,8 @@ class Suppliers
 
     #[Groups(["product:read", 'suppliers:read'])]
     #[ORM\OneToMany(mappedBy: 'supplier', targetEntity: Product::class)]
+    #[ORM\JoinColumn(name:"product_id", referencedColumnName:"id")]
+
     private Collection $products;
 
     public function __construct()

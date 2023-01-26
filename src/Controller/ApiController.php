@@ -2,6 +2,7 @@
  namespace App\Controller;
 
 use App\Services\OrderService;
+use App\Services\SupplierService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +23,13 @@ public function SalesByYear($year, OrderService $orderService ): Response{
 
 }
 
+#[Route('/api/SalesBySupplier/{supplier}', methods: ['GET'])]
+public function SalesBySupplier($supplier, SupplierService $supplierService ): Response{
+    
+      $salesBySupplier = $supplierService->getSalesBySupplier($supplier);
 
+    return new Response(json_encode($salesBySupplier), 200, ["Content-Type" => "application/json"]);
+
+}
 
 }

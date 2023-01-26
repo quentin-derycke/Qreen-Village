@@ -18,11 +18,7 @@ class OrderItem
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne]
-    
-    #[Groups(["product:read", "order:read"])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Product $product = null;
+   
 
     #[ORM\Column]
     #[Assert\NotBlank()]
@@ -35,6 +31,10 @@ class OrderItem
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $orderRef = null;
 
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Product $product = null;
+
 
 
 
@@ -43,17 +43,7 @@ class OrderItem
         return $this->id;
     }
 
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
-
-    public function setProduct(?Product $product): self
-    {
-        $this->product = $product;
-
-        return $this;
-    }
+  
 
     public function getQuantity(): ?int
     {
@@ -98,5 +88,17 @@ class OrderItem
     public function getTotal(): float
     {
         return $this->getProduct()->getPrice() * $this->getQuantity();
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
+
+        return $this;
     }
 }
