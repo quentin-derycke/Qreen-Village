@@ -3,3 +3,14 @@ Accept: application/json
 
 POST http://127.0.0.1:8000/api/products
 Content-Type: : application/json
+
+
+###
+
+GET https://quentin.amorce.org/api/categories
+Accept: application/json
+
+
+###
+POST http://127.0.0.1:8000/api/products
+Content-Type: : application/json
