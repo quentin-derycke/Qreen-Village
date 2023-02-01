@@ -33,7 +33,7 @@ class Category
     #[ORM\OneToMany(mappedBy: 'childs', targetEntity: self::class)]
     private Collection $parent;
 
-    
+    #[Groups(["product:read", 'category'])]
     #[ORM\OneToMany(mappedBy: 'categoryId', targetEntity: Product::class)]
     private Collection $products;
 

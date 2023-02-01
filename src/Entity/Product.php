@@ -34,36 +34,36 @@ class Product
 
 
 
-    #[Groups(["product:read"])]
+    #[Groups(["product:read", 'category'])]
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $description = null;
 
-    #[Groups(["product:read", "order:read"])]
+    #[Groups(["product:read", "order:read", 'category'])]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
 
-    #[Groups(["product:read"])]
+    #[Groups(["product:read", 'category'])]
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 2, nullable: true)]
     private ?string $discount = null;
 
-    #[Groups(["product:read"])]
+    #[Groups(["product:read", 'category'])]
     #[ORM\Column(nullable: true)]
     private ?int $stock = null;
 
-    #[Groups(["product:read"])]
+    #[Groups(["product:read", 'category'])]
     #[ORM\Column(length: 50)]
     private ?string $reference = null;
 
-    #[Groups(["product:read", "order:read"])]
+    #[Groups(["product:read", "order:read", 'category'])]
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categoryId = null;
 
-    #[Groups(["product:read"])]
+    #[Groups(["product:read", 'category'])]
     #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'products')]
     private Collection $image;
 
-    #[Groups(["product:read", 'suppliers:read', "order:read"])]
+    #[Groups(["product:read", 'suppliers:read', "order:read", 'category'])]
     #[ORM\ManyToOne( targetEntity: Suppliers::class, inversedBy: 'products')]
     #[ORM\JoinColumn(name:"supplierId", referencedColumnName:"id")]
     private ?Suppliers $supplier = null;
