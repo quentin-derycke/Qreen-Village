@@ -45,10 +45,10 @@ class SecurityController extends AbstractController
             $user = $form->getData();
 
 
-/*             $email = (new TemplatedEmail())
-            ->from(new E_address('info_noreply@Village.com', 'Green MailBot'))
+            $email = (new TemplatedEmail())
+            ->from(new E_address('quentin.derycke6@gmail.com', 'Green MailBot'))
             ->to($user->getEmail())
-            ->cc('Shipping@gvillage.com')
+            ->cc('qderycke10@gmail.com')
             ->subject('Votre commande est validée!')
             ->htmlTemplate('mail/email_verif.html.twig')
             ->context([
@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
             ]);
 
 
-    $mailer->send($email); */
+    $mailer->send($email); 
     
 
             $this->addFlash(
