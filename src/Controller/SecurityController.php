@@ -45,7 +45,7 @@ class SecurityController extends AbstractController
             $user = $form->getData();
 
 
-            $email = (new TemplatedEmail())
+/*             $email = (new TemplatedEmail())
             ->from(new E_address('info_noreply@Village.com', 'Green MailBot'))
             ->to($user->getEmail())
             ->cc('Shipping@gvillage.com')
@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
             ]);
 
 
-    $mailer->send($email);
+    $mailer->send($email); */
     
 
             $this->addFlash(
