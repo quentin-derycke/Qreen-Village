@@ -49,7 +49,7 @@ class SecurityController extends AbstractController
             ->from(new E_address('quentin.derycke6@gmail.com', 'Green MailBot'))
             ->to($user->getEmail())
             ->cc('qderycke10@gmail.com')
-            ->subject('Votre commande est validée!')
+            ->subject('Compte bien créé')
             ->htmlTemplate('mail/email_verif.html.twig')
             ->context([
                 'user' => $user,
