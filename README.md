@@ -8,6 +8,13 @@ L'objectif fil rouge de la formation était de concevoir 3 applications :
  - [Une application Mobile](https://github.com/quentin-derycke/NativeVillage)
  
  
+ ## Stack:
+ 
+
+  - <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> Bootsrap
+  - <a href="https://symfony.com" target="_blank" rel="noreferrer"> <img src="https://symfony.com/logos/symfony_black_03.svg" alt="symfony" width="40" height="40"/> Symfony
+ - <a href="https://api-platform.com" target="_blank" rel="noreferrer"> <img src="https://api-platform.com/static/74e20e175f4d908bbc0f1e2af28d3d66/Logo_Circle%20webby%20blue.svg" alt="api-platform" width="40" height="40"/> 
+ 
   # Attendus : 
   
   ## L'application Web réaliser avec le framework Symfony contient les fonctionalités suivantes : 
