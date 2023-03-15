@@ -361,7 +361,7 @@ class AppFixtures extends Fixture
             $manager->persist($product);
         }
 
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $product = new Product();
             $product->setName('Basse accoustique ' . $i)
                 ->setCategoryId($c21)
@@ -375,7 +375,7 @@ class AppFixtures extends Fixture
             $manager->persist($product);
         }
 
-        for ($i = 0; $i < 35; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $product = new Product();
             $product->setName('Basse ' . $i)
                 ->setCategoryId($c22)
