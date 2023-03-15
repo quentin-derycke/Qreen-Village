@@ -15,9 +15,9 @@ L'objectif fil rouge de la formation était de concevoir 3 applications :
   - Consultation du catalogue
   - Ajout/Suppression de produit dans le panier
   - Inscription d'un nouvel utilisateur sur le site (pour les particuliers)
-  -Connexion/Deconnexion d'un utilisateur pour accéder à son profil
-  -Validation du panier pour créer une nouvelle commande ()
-  -Visualisation des anciennes commandes
+  - Connexion/Deconnexion d'un utilisateur pour accéder à son profil
+  - Validation du panier pour créer une nouvelle commande ()
+  - Visualisation des anciennes commandes
   
   
   
