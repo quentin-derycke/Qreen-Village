@@ -130,4 +130,4 @@ Système->>User: Valide la commande, envoiet un mail recapitulatif.
 <img src="https://raw.githubusercontent.com/quentin-derycke/CDA/main/Filrouge/UML/Diagrame%20Activité.png">
 
 ###Diagramme de classe
-<img src="https://raw.githubusercontent.com/quentin-derycke/CDA/main/Filrouge/UML/QreenV_UMLClasse.jpg"
+<img src="https://raw.githubusercontent.com/quentin-derycke/CDA/main/Filrouge/UML/QreenV_UMLClasse.jpg">
