@@ -17,7 +17,7 @@ L'objectif fil rouge de la formation était de concevoir 3 applications :
  
   # Attendus : 
   
-  ## L'application Web réaliser avec le framework Symfony contient les fonctionalités suivantes : 
+  ## L'application Web réalisé avec le framework Symfony contient les fonctionalités suivantes : 
   
   - Consultation du catalogue
   - Ajout/Suppression de produit dans le panier
